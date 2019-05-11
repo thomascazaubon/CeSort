@@ -1,14 +1,11 @@
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
-import net.sf.mpxj.MPXJException;
-import net.sf.mpxj.ProjectFile;
-import net.sf.mpxj.reader.UniversalProjectReader;
 
 public class Model {
 	
@@ -18,10 +15,8 @@ public class Model {
 		
 	}
 	
-	/* * * * * M E T H O D S - T E M P O R A R Y * * * * */
-	
-	//TODO: Delete when it will be interfaced with Excel, PPT, MSProject & TTool.
-	
+	/* * * * * M E T H O D S - P R E V I E W * * * * */
+		
 	/**
 	 * Return an ImageIcon representing the corresponding requirements list
 	 */
@@ -99,20 +94,51 @@ public class Model {
 		return orgChart;
 	}
 	
-	/* * * * * M E T H O D S * * * * */
+	/* * * * * M E T H O D S - F I L E * * * * */
 	
 	/**
-	 * Return a ProjectFile corresponding to the scenario
+	 * Return a File representing the corresponding requirements list
 	 */
-	public static ProjectFile getSchedule(int scenario) {
-		UniversalProjectReader reader = new UniversalProjectReader();
-		ProjectFile schedule = null;
-		try {
-			schedule = reader.read("Resources/" + scenario + "/schedule.mpp");
-		} catch (MPXJException e) {
-			e.printStackTrace();
-		}
+	public static File getReqList(int scenario) {
+		File reqList = null;
+		reqList = new File("Resources/" + scenario + "/reqList.xslx");
+		return reqList;
+	}
+	
+	/**
+	 * Return a File representing the corresponding requirements model
+	 */
+	public static File getReqModel(int scenario) {
+		File reqModel = null;
+		reqModel = new File("Resources/" + scenario + "/reqModel.xml");
+		return reqModel;
+	}
+	
+	/**
+	 * Return a File representing the corresponding process model
+	 */
+	public static File getProcModel(int scenario) {
+		File procModel = null;
+		procModel = new File("Resources/" + scenario + "/procModel.xml");
+		return procModel;
+	}
+	
+	/**
+	 * Return a File representing the corresponding schedule
+	 */
+	public static File getSchedule(int scenario) {
+		File schedule = null;
+		schedule = new File("Resources/" + scenario + "/schedule.mpp");
 		return schedule;
+	}
+	
+	/**
+	 * Return a File representing the corresponding schedule
+	 */
+	public static File getOrgChart(int scenario) {
+		File orgChart = null;
+		orgChart = new File("Resources/" + scenario + "/orgChart.pptx");
+		return orgChart;
 	}
 	
 }
