@@ -149,6 +149,13 @@ scenario(5) :-
     weight(moreThan2T),
     standardPart(no),
     mainResponsabilities(design).
+scenario(5) :-
+    kindOfOrganisation(tier),
+    kindOfProduct(part),
+    headOfficeInEU(yes),
+    weight(moreThan2T),
+    standardPart(no),
+    mainResponsabilities(design).
 scenario(6) :-
     kindOfOrganisation(tier),
     kindOfProduct(part),

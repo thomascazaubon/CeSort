@@ -258,6 +258,7 @@ public class Controller {
 		
 		if (file == null) {
 			System.out.println("[ERROR] The file to modify doesn't exist.");
+			resourcesView.displayError("The file to modify doesn't exist.");
 		}
 		
 		Desktop desktop = null;
@@ -277,23 +278,23 @@ public class Controller {
 			switch (res) {
 			case "Schedule":
 				System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
-				//resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
+				resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
 				break;
 			case "Organization chart":
 				System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
-				//resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+				resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
 				break;
 			case "Requirements list":
 				System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
-				//resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
+				resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
 				break;
 			case "Requirements model":
 				System.out.println("[ERROR] You need the TTool application to modify this file.");
-				//resourcesView.displayError("You need the TTool application to modify this file.");
+				resourcesView.displayError("You need the TTool application to modify this file.");
 				break;
 			case "Processes model":
 				System.out.println("[ERROR] You need the TTool application to modify this file.");
-				//resourcesView.displayError("You need the TTool application to modify this file.");
+				resourcesView.displayError("You need the TTool application to modify this file.");
 				break;
 			}
 		}
