@@ -162,12 +162,24 @@ scenario(6) :-
     weight(moreThan2T),
     standardPart(no),
     mainResponsabilities(production).
+scenario(6) :-
+    kindOfOrganisation(tier),
+    kindOfProduct(appliance),
+    headOfficeInEU(yes),
+    weight(moreThan2T),
+    mainResponsabilities(production).
 scenario(7) :-
     kindOfOrganisation(tier),
     kindOfProduct(part),
     headOfficeInEU(yes),
     weight(moreThan2T),
     standardPart(no),
+    mainResponsabilities(both).
+scenario(7) :-
+    kindOfOrganisation(tier),
+    kindOfProduct(appliance),
+    headOfficeInEU(yes),
+    weight(moreThan2T),
     mainResponsabilities(both).
 
 scenario(0) :-
