@@ -105,6 +105,7 @@ public class QuestionView extends JFrame {
 		panel.add(questionLabel);
 		
 		lblQuestionItself = new JLabel("<html>"+currentQuestion.getTitle()+"<html>");
+		lblQuestionItself.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		layout.putConstraint(SpringLayout.NORTH, lblQuestionItself, 23, SpringLayout.SOUTH, questionLabel);
 		layout.putConstraint(SpringLayout.SOUTH, lblQuestionItself, -379, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.NORTH, answersScroll, 25, SpringLayout.SOUTH, lblQuestionItself);
@@ -114,7 +115,7 @@ public class QuestionView extends JFrame {
 		
 		lblYourPreviousAnswers = new JLabel("Your previous answers :");
 		layout.putConstraint(SpringLayout.WEST, lblYourPreviousAnswers, 272, SpringLayout.EAST, questionLabel);
-		lblYourPreviousAnswers.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblYourPreviousAnswers.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		layout.putConstraint(SpringLayout.SOUTH, lblYourPreviousAnswers, -539, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.NORTH, previousQuestionsScroll, 6, SpringLayout.SOUTH, lblYourPreviousAnswers);
 		panel.add(lblYourPreviousAnswers);
@@ -193,7 +194,7 @@ public class QuestionView extends JFrame {
 		if(listQA != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>"+question+"<html>");
-				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html> \n");
+				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html> \n -----\n");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
 				previousQuestionsPanel.revalidate();
