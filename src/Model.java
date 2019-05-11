@@ -96,6 +96,8 @@ public class Model {
 	
 	/* * * * * M E T H O D S - F I L E * * * * */
 	
+	//TODO Trouver comment enregistrer un fichier en mode lecture seule
+	
 	/**
 	 * Return a File representing the corresponding requirements list
 	 */

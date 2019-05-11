@@ -38,7 +38,7 @@ public class ResourcesView extends JFrame {
 		layout = new SpringLayout();
 		
 		this.setSize(600,600);
-		setUpFrame();
+		//setUpFrame();
 
 	}
 	private void setUpFrame() {

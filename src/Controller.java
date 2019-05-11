@@ -73,6 +73,7 @@ public class Controller {
 		Question nextQuestion = null;
 		try {
 			String keyAnswer = getKeyWithString(stringAnswer);
+			System.out.println("[DEBUG] Question : " + keyCurrentQuestion + "     Answer : " + keyAnswer + " = " + stringAnswer);
 			expertSystem.setKnowledge(keyCurrentQuestion, keyAnswer);
 			String result = expertSystem.reason();
 			//System.out.println(result);

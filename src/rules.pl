@@ -259,7 +259,7 @@ scenario(4) :-
     weight(moreThan2T),
     typeCertificate(no),
     requestModification(no),
-    nextTarget(tcAndCoa),
+    nextTarget(tcAndCoA),
     privilegeFromEASA(no),
     operationalConditionsMightBeRestricted(no).
 scenario(0) :-
