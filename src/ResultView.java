@@ -255,7 +255,8 @@ public class ResultView extends JFrame {
 		if(listQA.values() != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>" + question + "<html>");
-				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "\n <html>");
+				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
+				JLabel br = new JLabel(" -----");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
 				previousQuestionsPanel.revalidate();
