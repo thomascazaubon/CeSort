@@ -125,7 +125,7 @@ scenario(0) :-
     weight(lessThan2T).
 scenario(0) :-
     kindOfOrganisation(tier),
-    kindOfProduct(X), X \= tier.
+    kindOfProduct(X), X \= appliance.
 scenario(0) :-
     kindOfOrganisation(motorist),
     kindOfProduct(tier),
@@ -145,6 +145,12 @@ scenario(0) :-
 scenario(5) :-
     kindOfOrganisation(tier),
     kindOfProduct(appliance),
+    headOfficeInEU(yes),
+    weight(moreThan2T),
+    mainResponsabilities(design).
+scenario(5) :-
+    kindOfOrganisation(tier),
+    kindOfProduct(part),
     headOfficeInEU(yes),
     weight(moreThan2T),
     standardPart(no),

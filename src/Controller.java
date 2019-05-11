@@ -1,5 +1,8 @@
 
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +10,6 @@ import javax.swing.ImageIcon;
 
 import gnu.prolog.demo.mentalarithmetic.NoAnswerException;
 import gnu.prolog.vm.PrologException;
-import net.sf.mpxj.ProjectFile;
 
 enum Language{FR,EN};
 enum View{Welcome, Question, Result, Resources};
@@ -24,16 +26,11 @@ public class Controller {
 	//private HashMap<String, String> answers;
 	private String keyCurrentQuestion;
 	private int numCurrentQuestion = 1;
-	//Contains the representation of the resources to be displayed on resultView
-	//To be changed when the format of the resources is settled
-	private String[] resources;
-	private ProjectFile schedule;
 	private ExpertSystem expertSystem;
 	private WelcomeView welcomeView;
 	private QuestionView questionView;
 	private ResultView resultView;
 	private ResourcesView resourcesView;
-	private Model model;
 	private View currentView;
 	
 	private int scenario;
@@ -43,9 +40,6 @@ public class Controller {
 	public Controller() {
 		expertSystem = new ExpertSystem();
 		welcomeView = new WelcomeView(this);
-		model = new Model();
-		//answers = new HashMap<String,String>();
-		resources = new String[NUMBER_OF_RESOURCES];
 		questions = Question.getQuestions();
 		keyCurrentQuestion = null;
 		welcomeView.startWelcomeView();
@@ -239,6 +233,71 @@ public class Controller {
 		resultView.closeResultView();
 		currentView = View.Resources;
 		return ret;
+	}
+	
+	//Used by ResourcesView when the user asks to modify a file
+	public void modifyResource(String res) {
+		File file = null;
+		switch (res) {
+		case "Schedule":
+			file = Model.getSchedule(scenario);
+			break;
+		case "Organization chart":
+			file = Model.getOrgChart(scenario);
+			break;
+		case "Requirements list":
+			file = Model.getReqList(scenario);
+			break;
+		case "Requirements model":
+			file = Model.getReqModel(scenario);
+			break;
+		case "Processes model":
+			file = Model.getProcModel(scenario);
+			break;
+		}
+		
+		if (file == null) {
+			System.out.println("[ERROR] The file to modify doesn't exist.");
+			resourcesView.displayError("The file to modify doesn't exist.");
+		}
+		
+		Desktop desktop = null;
+		if (Desktop.isDesktopSupported()) {
+			System.out.println("[DEBUG] Desktop is supported.");
+			desktop = Desktop.getDesktop();
+			if (desktop.isSupported(Desktop.Action.OPEN)) {
+				System.out.println("[DEBUG] Desktop.Action.open is supported.");
+				try {
+					desktop.open(file);
+				} catch (IOException e) {
+					System.out.println("[ERROR] "); e.printStackTrace();
+				}
+			}
+		} else {
+			//TODO Uncomment when resourcesView.displayError will be implemented.
+			switch (res) {
+			case "Schedule":
+				System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
+				resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
+				break;
+			case "Organization chart":
+				System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+				resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+				break;
+			case "Requirements list":
+				System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
+				resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
+				break;
+			case "Requirements model":
+				System.out.println("[ERROR] You need the TTool application to modify this file.");
+				resourcesView.displayError("You need the TTool application to modify this file.");
+				break;
+			case "Processes model":
+				System.out.println("[ERROR] You need the TTool application to modify this file.");
+				resourcesView.displayError("You need the TTool application to modify this file.");
+				break;
+			}
+		}
 	}
 	
 	public void backToResults() {
