@@ -62,6 +62,7 @@ public class ResourcesView extends JFrame {
 		panel.add(btnResults);
 		
 		JLabel lblResource = new JLabel(res);
+		lblResource.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		layout.putConstraint(SpringLayout.NORTH, lblResource, 26, SpringLayout.NORTH, panel);
 		layout.putConstraint(SpringLayout.WEST, lblResource, 27, SpringLayout.WEST, panel);
 		panel.add(lblResource);
