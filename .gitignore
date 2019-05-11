@@ -2,3 +2,7 @@ bin
 .classpath
 .project
 .settings
+CeSort.jar
+CeSort.zip
+Lib/knowledge.pl
+CeSort

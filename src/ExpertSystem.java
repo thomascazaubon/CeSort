@@ -89,7 +89,7 @@ public class ExpertSystem {
     private void writeKnowledge() 
 	{ 
     	System.out.println("PATH : " + ExpertSystem.class.getResource("./").getFile());
-		String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
+		//String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
 		try { 
 		   	FileWriter fw = new FileWriter("Lib/knowledge.pl", false); 
 		  	BufferedWriter output = new BufferedWriter(fw); 
@@ -111,7 +111,7 @@ public class ExpertSystem {
 	 */
     public void readKnowledge() 
 	{ 
-		String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
+		//String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
 		try { 
 		   	FileReader fr = new FileReader("Lib/knowledge.pl"); 
 		  	BufferedReader input = new BufferedReader(fr);
