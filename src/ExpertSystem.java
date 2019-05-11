@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
 import gnu.prolog.database.PrologTextLoaderError;
 import gnu.prolog.demo.mentalarithmetic.NoAnswerException;
@@ -90,7 +91,7 @@ public class ExpertSystem {
     	System.out.println("PATH : " + ExpertSystem.class.getResource("./").getFile());
 		String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
 		try { 
-		   	FileWriter fw = new FileWriter(file, false); 
+		   	FileWriter fw = new FileWriter("Lib/knowledge.pl", false); 
 		  	BufferedWriter output = new BufferedWriter(fw); 
 		  	//System.out.println("[DEBUG] Writing in knowledge.pl : ");
 		  	for(int i = 0; i < NBCRITERIA; i++) {
@@ -112,7 +113,7 @@ public class ExpertSystem {
 	{ 
 		String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
 		try { 
-		   	FileReader fr = new FileReader(file); 
+		   	FileReader fr = new FileReader("Lib/knowledge.pl"); 
 		  	BufferedReader input = new BufferedReader(fr);
 		  	String line;
 		  	while ((line = input.readLine()) != null) {
@@ -148,9 +149,12 @@ public class ExpertSystem {
 		this.env = new Environment();
 
 		// Get the prolog files to use
+		/*
 		this.env.ensureLoaded(AtomTerm.get(ExpertSystem.class.getResource("knowledge.pl").getFile()));
-		this.env.ensureLoaded(AtomTerm.get(ExpertSystem.class.getResource("rules.pl").getFile()));
-
+		this.env.ensureLoaded(AtomTerm.get(ExpertSystem.class.getResource("knowledge.pl").getFile()));
+		 */
+		this.env.ensureLoaded(AtomTerm.get("Lib/knowledge.pl"));
+		this.env.ensureLoaded(AtomTerm.get("Lib/rules.pl"));
 		// Get the interpreter.
 		
 		this.interpreter = this.env.createInterpreter();
