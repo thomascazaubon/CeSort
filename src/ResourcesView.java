@@ -19,11 +19,13 @@ public class ResourcesView extends JFrame {
 	
 	private JPanel panel;
 	private SpringLayout layout;
+	private JLabel error;
 	
 	private String res;
 	private ImageIcon imageIcon; 
 
 	public Controller controller;
+	private JLabel imageRes;
 	
 	/* * * * * C O N S T R U C T O R * * * * */
 	
@@ -36,7 +38,7 @@ public class ResourcesView extends JFrame {
 		layout = new SpringLayout();
 		
 		this.setSize(600,600);
-		//setUpFrame();
+		setUpFrame();
 
 	}
 	private void setUpFrame() {
@@ -46,11 +48,9 @@ public class ResourcesView extends JFrame {
 		panel.setLayout(layout);
 		
 		JButton btnResults = new JButton("Results");
-		layout.putConstraint(SpringLayout.NORTH, btnResults, 521, SpringLayout.NORTH, panel);
-		layout.putConstraint(SpringLayout.WEST, btnResults, 25, SpringLayout.WEST, panel);
-		layout.putConstraint(SpringLayout.SOUTH, btnResults, -10, SpringLayout.SOUTH, panel);
-		layout.putConstraint(SpringLayout.EAST, btnResults, -421, SpringLayout.EAST, panel);
-		btnResults.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		layout.putConstraint(SpringLayout.WEST, btnResults, 78, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.EAST, btnResults, -402, SpringLayout.EAST, panel);
+		btnResults.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnResults.setForeground(new Color(0, 139, 139));
 		btnResults.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,21 +67,42 @@ public class ResourcesView extends JFrame {
 		panel.add(lblResource);
 		
 
-		JLabel imageRes = null;		
 		imageRes = new JLabel(imageIcon);
-		layout.putConstraint(SpringLayout.NORTH, imageRes, 70, SpringLayout.NORTH, panel);
-		layout.putConstraint(SpringLayout.WEST, imageRes, 70, SpringLayout.WEST, panel);
-		layout.putConstraint(SpringLayout.SOUTH, imageRes, -70, SpringLayout.SOUTH, panel);
-		layout.putConstraint(SpringLayout.EAST, imageRes, -70, SpringLayout.EAST, panel);
+		layout.putConstraint(SpringLayout.NORTH, btnResults, 18, SpringLayout.SOUTH, imageRes);
+		layout.putConstraint(SpringLayout.NORTH, imageRes, 26, SpringLayout.NORTH, panel);
+		layout.putConstraint(SpringLayout.WEST, imageRes, 25, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.SOUTH, imageRes, -121, SpringLayout.SOUTH, panel);
+		layout.putConstraint(SpringLayout.EAST, imageRes, -33, SpringLayout.EAST, panel);
 		
 		imageRes.setOpaque(false);
 	    panel.add(imageRes);
+	    
+	    JButton btnNewButton = new JButton("Open to modify");
+	    btnNewButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		controller.modifyResource(res);
+	    	}
+	    });
+	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
+	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
+	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -73, SpringLayout.SOUTH, panel);
+	    layout.putConstraint(SpringLayout.EAST, btnNewButton, -151, SpringLayout.EAST, panel);
+	    panel.add(btnNewButton);
+	    
+	    JLabel error = new JLabel("");
+	    layout.putConstraint(SpringLayout.NORTH, error, 16, SpringLayout.SOUTH, btnResults);
+	    layout.putConstraint(SpringLayout.WEST, error, 57, SpringLayout.WEST, panel);
+	    layout.putConstraint(SpringLayout.SOUTH, error, -10, SpringLayout.SOUTH, panel);
+	    layout.putConstraint(SpringLayout.EAST, error, 536, SpringLayout.WEST, panel);
+	    panel.add(error);
 		
 		panel.repaint();
 		panel.revalidate();
 	}
 	
-	
+	public void displayError(String txtError) {
+		error.setText(txtError);
+	}
 	
 	
 	public void startResourcesView(String r, ImageIcon img) {
