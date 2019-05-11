@@ -1,0 +1,12 @@
+kindOfOrganisation(tier).
+kindOfProduct(motorOrPropulsionSystem).
+headOfficeInEU(yes).
+weight(moreThan2T).
+standardPart(_).
+mainResponsabilities(_).
+typeCertificate(_).
+requestModification(_).
+nextTarget(_).
+modificationRequestOrNexProgram(_).
+privilegeFromEASA(_).
+operationalConditionsMightBeRestricted(_).
