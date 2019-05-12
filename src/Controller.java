@@ -172,7 +172,7 @@ public class Controller {
 	
 	//Used when clicking load on the welcome view, allows the user to load a previous project
 	//Return the HashMap<questionTitle, answerTitle>
-	public HashMap<String, String> loadResults(String path) {
+	public void loadResults(String path) {
 		//TODO To be tested
 		expertSystem.readKnowledge(path);
 		// answers = <questionTitle, answerTitle>
@@ -187,7 +187,9 @@ public class Controller {
 	        	
 	        	answers.put(question.getTitle(), answer);
         }
-        return answers;
+        welcomeView.closeWelcomeView();
+        resultView = new ResultView(this);
+        resultView.startResultView(answers);
 	}
 	
 	//Used when clicking on download on the results view
