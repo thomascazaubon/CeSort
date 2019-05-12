@@ -93,6 +93,7 @@ public class ExpertSystem {
 				fw = new FileWriter("Lib/knowledge.pl", false);
 	    	}
 			else {
+				path += ".cesort";
 		    	System.out.println("[DEBUG] Path to save : " + path);
 				fw = new FileWriter(path);
 			}
