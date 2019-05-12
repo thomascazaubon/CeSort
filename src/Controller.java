@@ -168,33 +168,36 @@ public class Controller {
 	//Creates a specific file that contains the data of the ExpertSystem : knowledge.pl.
 	public void saveResults(String path) {
 		//To use the "cesort" extension
-		String pathSave = path.split("//.")[0] + ".cesort";
+		String pathSave = path.split("\\.")[0] + ".cesort";
 		expertSystem.writeKnowledge(pathSave);
 	}
 	
 	//Used when clicking load on the welcome view, allows the user to load a previous project
 	//Return the HashMap<stringQuestion, stringAnswer>
 	public void loadResults(String path) {
-		expertSystem.readKnowledge(path);
-		// strings = <stringQuestion, stringAnswer>
-		HashMap<String,String> strings = new HashMap<String, String>();
-		// keys = <keyQuestion, keyAnswer>
-		HashMap<String, String> keys = expertSystem.getKeyAnswers();
-        for (Map.Entry<String, String> mapEntry : keys.entrySet()) {
-	        	String keyQuestion = mapEntry.getKey();
-	        	String keyAnswer = mapEntry.getValue();
-	        	Question question = questions.get(keyQuestion);
-	        	String answer = question.getAnswers().get(keyAnswer);
-	        	strings.put(question.getTitle(), answer);
-        }
-        try {
-			scenario = Integer.parseInt(expertSystem.reason());
-		} catch (NumberFormatException | PrologException | NoAnswerException e) {
-			System.out.println("[ERROR] "); e.printStackTrace();
-		}
-        welcomeView.closeWelcomeView();
-        resultView = new ResultView(this);
-        resultView.startResultView(strings);
+		String extension = path.split("\\.")[1];
+		if(extension.equals("cesort")) {
+			expertSystem.readKnowledge(path);
+			// strings = <stringQuestion, stringAnswer>
+			HashMap<String,String> strings = new HashMap<String, String>();
+			// keys = <keyQuestion, keyAnswer>
+			HashMap<String, String> keys = expertSystem.getKeyAnswers();
+	        for (Map.Entry<String, String> mapEntry : keys.entrySet()) {
+		        	String keyQuestion = mapEntry.getKey();
+		        	String keyAnswer = mapEntry.getValue();
+		        	Question question = questions.get(keyQuestion);
+		        	String answer = question.getAnswers().get(keyAnswer);
+		        	strings.put(question.getTitle(), answer);
+	        }
+	        try {
+				scenario = Integer.parseInt(expertSystem.reason());
+			} catch (NumberFormatException | PrologException | NoAnswerException e) {
+				System.out.println("[ERROR] "); e.printStackTrace();
+			}
+	        welcomeView.closeWelcomeView();
+	        resultView = new ResultView(this);
+	        resultView.startResultView(strings);
+		} else {}
 	}
 	
 	//Used when clicking on download on the results view
