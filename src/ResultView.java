@@ -118,8 +118,10 @@ public class ResultView extends JFrame {
 		btnDownload.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnDownload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Nothing yet.
-				controller.downloadResources();
+				JFileChooser chooser = new JFileChooser();
+				chooser.showSaveDialog(panel);
+				String downloadPath = chooser.getSelectedFile().getAbsolutePath();
+				controller.downloadResources(downloadPath);
 			}
 		});
 		panel.add(btnDownload);
