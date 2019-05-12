@@ -194,10 +194,12 @@ public class QuestionView extends JFrame {
 		if(listQA != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>"+question+"<html>");
+				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
 				JLabel br = new JLabel(" -----");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
+				previousQuestionsPanel.add(br);
 				previousQuestionsPanel.revalidate();
 				previousQuestionsPanel.repaint();
 			}

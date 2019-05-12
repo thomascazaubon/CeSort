@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import java.awt.Font;
@@ -110,8 +111,10 @@ public class WelcomeView extends JFrame {
 		btnLoadProject.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLoadProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO: Replace "" with the path of the file.
-				cont.loadResults("");
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(welcomePanel);
+				String loadPath = chooser.getSelectedFile().getAbsolutePath();
+				cont.loadResults(loadPath);
 			}
 		});
 		welcomePanel.add(btnLoadProject);

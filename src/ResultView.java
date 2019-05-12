@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -131,8 +132,10 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.EAST, btnSave, -39, SpringLayout.WEST, btnDownload);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO: Replace "" by the path of the file
-				controller.saveResults("");
+				JFileChooser chooser = new JFileChooser();
+				chooser.showSaveDialog(panel);
+				String savePath = chooser.getSelectedFile().getAbsolutePath();
+				controller.saveResults(savePath);
 			}
 		});
 		btnSave.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -255,10 +258,12 @@ public class ResultView extends JFrame {
 		if(listQA.values() != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>" + question + "<html>");
+				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
 				JLabel br = new JLabel(" -----");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
+				previousQuestionsPanel.add(br);
 				previousQuestionsPanel.revalidate();
 				previousQuestionsPanel.repaint();
 			}
