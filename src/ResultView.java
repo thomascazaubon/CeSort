@@ -132,7 +132,10 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.EAST, btnSave, -39, SpringLayout.WEST, btnDownload);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.saveResults();
+				
+				
+				
+				controller.saveResults(savePath);
 			}
 		});
 		btnSave.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
