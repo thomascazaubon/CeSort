@@ -16,7 +16,7 @@ public class Model {
 	/**
 	 * Return an ImageIcon representing the corresponding requirements list
 	 */
-	public static ImageIcon getReqListTemporary(int scenario) {
+	public static ImageIcon getReqListPreview(int scenario) {
 		ImageIcon reqList = null;
 		//System.out.println(Model.class.getResource("/..").getFile());
 		reqList = new ImageIcon("Resources/" + scenario + "/reqList.png");
@@ -26,7 +26,7 @@ public class Model {
 	/**
 	 * Return an ImageIcon representing the corresponding requirements model
 	 */
-	public static ImageIcon getReqModelTemporary(int scenario) {
+	public static ImageIcon getReqModelPreview(int scenario) {
 		ImageIcon reqModel = null;
 		reqModel = new ImageIcon("Resources/" + scenario + "/reqModel.png");
 		return reqModel;
@@ -35,7 +35,7 @@ public class Model {
 	/**
 	 * Return an ImageIcon representing the corresponding process model
 	 */
-	public static ImageIcon getProcModelTemporary(int scenario) {
+	public static ImageIcon getProcModelPreview(int scenario) {
 		ImageIcon procModel = new ImageIcon("Resources/" + scenario + "/procModel.png");
 		return procModel;
 	}
@@ -43,7 +43,7 @@ public class Model {
 	/**
 	 * Return an ImageIcon representing the corresponding schedule
 	 */
-	public static ImageIcon getScheduleTemporary(int scenario) {
+	public static ImageIcon getSchedulePreview(int scenario) {
 		ImageIcon schedule = null;
 		schedule = new ImageIcon("Resources/" + scenario + "/schedule.png");
 		return schedule;
@@ -52,7 +52,7 @@ public class Model {
 	/**
 	 * Return an ImageIcon representing the corresponding schedule
 	 */
-	public static ImageIcon getOrgChartTemporary(int scenario) {
+	public static ImageIcon getOrgChartPreview(int scenario) {
 		ImageIcon orgChart = null;
 		orgChart = new ImageIcon("Resources/" + scenario + "/orgChart.png");
 		return orgChart;

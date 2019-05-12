@@ -30,8 +30,7 @@ public class ResultView extends JFrame {
 	private JPanel panel;
 	private SpringLayout layout;
 	
-	public Controller controller;
-	public Question currentQuestion;
+	private Controller controller;
 	private HashMap<String, String> listQA;
 	
 	private JPanel previousQuestionsPanel;
@@ -132,7 +131,8 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.EAST, btnSave, -39, SpringLayout.WEST, btnDownload);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.saveResults();
+				//TODO: Replace "" by the path of the file
+				controller.saveResults("");
 			}
 		});
 		btnSave.setFont(new Font("Lucida Grande", Font.PLAIN, 16));

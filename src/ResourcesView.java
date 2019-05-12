@@ -24,7 +24,7 @@ public class ResourcesView extends JFrame {
 	private String res;
 	private ImageIcon imageIcon; 
 
-	public Controller controller;
+	private Controller controller;
 	private JLabel imageRes;
 	
 	/* * * * * C O N S T R U C T O R * * * * */
