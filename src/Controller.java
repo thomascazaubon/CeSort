@@ -204,26 +204,13 @@ public class Controller {
 	
 	//Used when clicking on download on the results view
 	//Downloads all resources in a zip archive
-	public void downloadResources(String path) {
-		File zipName = new File(path);
-		path += ".zip";
-		byte[] buffer = new byte[1024];
+	public void downloadResources(String str) {
+		String path = str.split("\\.")[0] + ".zip";
 		try {
 			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(path));
-			
-			FileInputStream reqList = new FileInputStream(Model.getReqList(scenario));
-			ZipEntry reqListEntry = new ZipEntry(Model.getReqList(scenario).getName());
-			copyFileInZip(reqList,reqListEntry,zip);
-			
-			FileInputStream orgChart = new FileInputStream(Model.getOrgChart(scenario));
-			ZipEntry orgChartEntry = new ZipEntry(Model.getOrgChart(scenario).getName());
-			copyFileInZip(orgChart,orgChartEntry,zip);
-			/*
-			FileInputStream orgChart = new FileInputStream(Model.getOrgChart(scenario));
-			ZipEntry orgChartEntry = new ZipEntry(Model.getOrgChart(scenario).getName());
-			copyFileInZip(orgChart,orgChartEntry,zip);
-			*/
-			
+			for (Resource r : Resource.values()) {
+				copyFileInZip(r,zip);
+			}
 			zip.close();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -360,10 +347,30 @@ public class Controller {
 		return ret;
 	}
 	
-	private void copyFileInZip(FileInputStream in, ZipEntry ze, ZipOutputStream zos) {
+	private void copyFileInZip(Resource res, ZipOutputStream zos) {
 		int len;
 		byte[] buffer = new byte[1024];
+		File f = null;
+		switch(res) {
+		case Schedule:
+			f = Model.getSchedule(scenario);
+			break;
+		case Chart:
+			f = Model.getOrgChart(scenario);
+			break;
+		case ReqList:
+			f = Model.getReqList(scenario);
+			break;
+		case ReqModel:
+			f = Model.getReqModel(scenario);
+			break;
+		case ProcModel:
+			f = Model.getProcModel(scenario);
+			break;
+		}
 		try {
+			FileInputStream in = new FileInputStream(f);
+			ZipEntry ze = new ZipEntry(f.getName());
 			zos.putNextEntry(ze);
 			while((len = in.read(buffer)) > 0) {
 				zos.write(buffer,0,len);
@@ -372,7 +379,7 @@ public class Controller {
 			zos.closeEntry();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	

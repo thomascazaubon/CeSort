@@ -92,7 +92,7 @@ public class Model {
 	 */
 	public static File getSchedule(int scenario) {
 		File schedule = null;
-		schedule = new File("Resources/" + scenario + "/schedule.mpp");
+		schedule = new File("Resources/" + scenario + "/schedule.xlsx");
 		return schedule;
 	}
 	
