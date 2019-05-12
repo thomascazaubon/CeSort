@@ -3,7 +3,6 @@
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class Controller {
 
 	/* * * * * A T T R I B U T E S * * * * */
 		
-	//The list of all available questions
+	//The list of all available questions : <keyQuestion, Question>
 	private HashMap<String, Question> questions;
 	//All the answers provided until now, the key is the key of the question that they correspond to
 	private String keyCurrentQuestion;
@@ -80,22 +79,18 @@ public class Controller {
 			System.out.println("[DEBUG] Question : " + keyCurrentQuestion + "     Answer : " + keyAnswer + " = " + stringAnswer);
 			expertSystem.setKnowledge(keyCurrentQuestion, keyAnswer);
 			String result = expertSystem.reason();
-			//System.out.println(result);
 			boolean scenarioFound = result.matches("\\d+");
 			questionView.closeQuestionView();
 			//When the questionnaire is finished
 			if(scenarioFound) {
 				scenario = Integer.parseInt(result);
 				System.out.println("[DEBUG] scenario = " + scenario);
-				//Retrieving the resources
-				//Can be displayed using :
-				//http://www.mpxj.org/apidocs/net/sf/mpxj/explorer/ProjectFilePanel.html
-				//schedule = Model.getSchedule(scenario);
 				//Displaying resultView
 				resultView = new ResultView(this);
 				resultView.startResultView(getStrings());
+				//Update the current view
 				currentView = View.Result;
-			//Otherwise, we proceed to next question
+			//Otherwise, we proceed to the next question
 			} else {
 				nextQuestion = questions.get(result);
 				numCurrentQuestion++;
@@ -157,47 +152,49 @@ public class Controller {
 	}
 	
 	//Called upon clicking on an answer in the list of previous questions displayed during the questionnaire
+	//[optional]
 	public Question editAnswer(String keyQuestion) {
 		keyCurrentQuestion = keyQuestion;
 		return questions.get(keyQuestion);
 	}
 	
+	//[optional]
 	public void changeLanguage(Language L) {
 		//TODO
 	}
 	
-	//Used when clicking save on the results view, allows the user to specify
-	//a place where the project has to be saved (path).
+	//Used when clicking save on the results view, 
+	//allows the user to specify a place where the project has to be saved (path).
 	//Creates a specific file that contains the data of the ExpertSystem : knowledge.pl.
 	public void saveResults(String path) {
-		expertSystem.writeKnowledge(path);
+		//To use the "cesort" extension
+		String pathSave = path.split("//.")[0] + ".cesort";
+		expertSystem.writeKnowledge(pathSave);
 	}
 	
 	//Used when clicking load on the welcome view, allows the user to load a previous project
-	//Return the HashMap<questionTitle, answerTitle>
+	//Return the HashMap<stringQuestion, stringAnswer>
 	public void loadResults(String path) {
 		expertSystem.readKnowledge(path);
-		// answers = <questionTitle, answerTitle>
-		HashMap<String,String> answers = new HashMap<String, String>();
-		// keyAnswers = <keyQuestion, keyAnswer>
-		HashMap<String, String> keyAnswers = expertSystem.getKeyAnswers();
-        for (Map.Entry<String, String> mapEntry : keyAnswers.entrySet()) {
+		// strings = <stringQuestion, stringAnswer>
+		HashMap<String,String> strings = new HashMap<String, String>();
+		// keys = <keyQuestion, keyAnswer>
+		HashMap<String, String> keys = expertSystem.getKeyAnswers();
+        for (Map.Entry<String, String> mapEntry : keys.entrySet()) {
 	        	String keyQuestion = mapEntry.getKey();
 	        	String keyAnswer = mapEntry.getValue();
 	        	Question question = questions.get(keyQuestion);
 	        	String answer = question.getAnswers().get(keyAnswer);
-	        	
-	        	answers.put(question.getTitle(), answer);
+	        	strings.put(question.getTitle(), answer);
         }
         try {
 			scenario = Integer.parseInt(expertSystem.reason());
 		} catch (NumberFormatException | PrologException | NoAnswerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] "); e.printStackTrace();
 		}
         welcomeView.closeWelcomeView();
         resultView = new ResultView(this);
-        resultView.startResultView(answers);
+        resultView.startResultView(strings);
 	}
 	
 	//Used when clicking on download on the results view
@@ -211,7 +208,6 @@ public class Controller {
 			}
 			zip.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -376,11 +372,9 @@ public class Controller {
 			in.close();
 			zos.closeEntry();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
 	}
-	
 }
 
 
