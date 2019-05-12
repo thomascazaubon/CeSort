@@ -170,14 +170,12 @@ public class Controller {
 	//a place where the project has to be saved (path).
 	//Creates a specific file that contains the data of the ExpertSystem : knowledge.pl.
 	public void saveResults(String path) {
-		//TODO To be tested
 		expertSystem.writeKnowledge(path);
 	}
 	
 	//Used when clicking load on the welcome view, allows the user to load a previous project
 	//Return the HashMap<questionTitle, answerTitle>
 	public void loadResults(String path) {
-		//TODO To be tested
 		expertSystem.readKnowledge(path);
 		// answers = <questionTitle, answerTitle>
 		HashMap<String,String> answers = new HashMap<String, String>();
