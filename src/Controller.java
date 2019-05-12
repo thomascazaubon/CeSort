@@ -2,6 +2,7 @@
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -81,6 +82,7 @@ public class Controller {
 			String result = expertSystem.reason();
 			//System.out.println(result);
 			boolean scenarioFound = result.matches("\\d+");
+			questionView.closeQuestionView();
 			//When the questionnaire is finished
 			if(scenarioFound) {
 				scenario = Integer.parseInt(result);
@@ -90,13 +92,11 @@ public class Controller {
 				//http://www.mpxj.org/apidocs/net/sf/mpxj/explorer/ProjectFilePanel.html
 				//schedule = Model.getSchedule(scenario);
 				//Displaying resultView
-				questionView.closeQuestionView();
 				resultView = new ResultView(this);
 				resultView.startResultView(getStrings());
 				currentView = View.Result;
 			//Otherwise, we proceed to next question
 			} else {
-				questionView.closeQuestionView();
 				nextQuestion = questions.get(result);
 				numCurrentQuestion++;
 				nextQuestion.setNum(numCurrentQuestion);
@@ -191,6 +191,12 @@ public class Controller {
 	        	
 	        	answers.put(question.getTitle(), answer);
         }
+        try {
+			scenario = Integer.parseInt(expertSystem.reason());
+		} catch (NumberFormatException | PrologException | NoAnswerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         welcomeView.closeWelcomeView();
         resultView = new ResultView(this);
         resultView.startResultView(answers);
@@ -199,19 +205,29 @@ public class Controller {
 	//Used when clicking on download on the results view
 	//Downloads all resources in a zip archive
 	public void downloadResources(String path) {
-		
-		ZipEntry schedule = new ZipEntry("schedule.xlsx");
-		ZipEntry reqList = new ZipEntry("reqList.xlsx");
-		ZipEntry orgChart = new ZipEntry("orgChart.xlsx");
+		File zipName = new File(path);
+		path += ".zip";
+		byte[] buffer = new byte[1024];
 		try {
 			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(path));
-			zip.putNextEntry(schedule);
-			zip.putNextEntry(reqList);
-			zip.putNextEntry(orgChart);
+			
+			FileInputStream reqList = new FileInputStream(Model.getReqList(scenario));
+			ZipEntry reqListEntry = new ZipEntry(Model.getReqList(scenario).getName());
+			copyFileInZip(reqList,reqListEntry,zip);
+			
+			FileInputStream orgChart = new FileInputStream(Model.getOrgChart(scenario));
+			ZipEntry orgChartEntry = new ZipEntry(Model.getOrgChart(scenario).getName());
+			copyFileInZip(orgChart,orgChartEntry,zip);
+			/*
+			FileInputStream orgChart = new FileInputStream(Model.getOrgChart(scenario));
+			ZipEntry orgChartEntry = new ZipEntry(Model.getOrgChart(scenario).getName());
+			copyFileInZip(orgChart,orgChartEntry,zip);
+			*/
+			
 			zip.close();
-		} catch (IOException e) {
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 	
@@ -342,6 +358,22 @@ public class Controller {
 	        	}
 		}
 		return ret;
+	}
+	
+	private void copyFileInZip(FileInputStream in, ZipEntry ze, ZipOutputStream zos) {
+		int len;
+		byte[] buffer = new byte[1024];
+		try {
+			zos.putNextEntry(ze);
+			while((len = in.read(buffer)) > 0) {
+				zos.write(buffer,0,len);
+			}
+			in.close();
+			zos.closeEntry();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
