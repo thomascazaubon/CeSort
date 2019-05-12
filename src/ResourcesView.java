@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import java.awt.Font;
+import java.awt.Image;
 
 public class ResourcesView extends JFrame {
 	static final long serialVersionUID = 1L;
@@ -66,15 +67,16 @@ public class ResourcesView extends JFrame {
 		layout.putConstraint(SpringLayout.NORTH, lblResource, 26, SpringLayout.NORTH, panel);
 		layout.putConstraint(SpringLayout.WEST, lblResource, 27, SpringLayout.WEST, panel);
 		panel.add(lblResource);
-		
 
-		imageRes = new JLabel(imageIcon);
+		imageRes = new JLabel();
 		layout.putConstraint(SpringLayout.NORTH, btnResults, 18, SpringLayout.SOUTH, imageRes);
 		layout.putConstraint(SpringLayout.NORTH, imageRes, 26, SpringLayout.NORTH, panel);
 		layout.putConstraint(SpringLayout.WEST, imageRes, 25, SpringLayout.WEST, panel);
 		layout.putConstraint(SpringLayout.SOUTH, imageRes, -121, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.EAST, imageRes, -33, SpringLayout.EAST, panel);
-		
+		Image imgScaled = imageIcon.getImage().getScaledInstance(540, 350, Image.SCALE_SMOOTH);
+		imageIcon = new ImageIcon(imgScaled);
+		imageRes.setIcon(imageIcon);
 		imageRes.setOpaque(false);
 	    panel.add(imageRes);
 	    
