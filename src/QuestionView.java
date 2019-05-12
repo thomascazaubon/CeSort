@@ -35,8 +35,8 @@ public class QuestionView extends JFrame {
 	private BoxLayout answersLayout;
 	private JScrollPane answersScroll;
 	
-	public Controller controller;
-	public Question currentQuestion;
+	private Controller controller;
+	private Question currentQuestion;
 	private HashMap<String, String> listQA;
 	
 	private String currentAnswer;

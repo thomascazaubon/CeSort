@@ -19,7 +19,7 @@ public class WelcomeView extends JFrame {
 	private JPanel welcomePanel;
 	private SpringLayout layout;
 
-	public Controller cont;
+	private Controller cont;
 	
 	/* * * * * C O N S T R U C T O R * * * * */
 	
@@ -110,7 +110,8 @@ public class WelcomeView extends JFrame {
 		btnLoadProject.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLoadProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Nothing yet.
+				//TODO: Replace "" with the path of the file.
+				cont.loadResults("");
 			}
 		});
 		welcomePanel.add(btnLoadProject);

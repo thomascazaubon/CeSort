@@ -136,7 +136,7 @@ public class ExpertSystem {
  	}
     
     /**
-	 * Print the content of knowledge[][]
+	 * Print the content of knowledge[][] to debug
 	 */
     public void printKnowledge() 
 	{ 

@@ -23,7 +23,6 @@ public class Controller {
 	//The list of all available questions
 	private HashMap<String, Question> questions;
 	//All the answers provided until now, the key is the key of the question that they correspond to
-	//private HashMap<String, String> answers;
 	private String keyCurrentQuestion;
 	private int numCurrentQuestion = 1;
 	private ExpertSystem expertSystem;
@@ -159,7 +158,7 @@ public class Controller {
 		return questions.get(keyQuestion);
 	}
 	
-	public void changeLanguage() {
+	public void changeLanguage(Language L) {
 		//TODO
 	}
 	
@@ -200,42 +199,36 @@ public class Controller {
 		*/
 	}
 	
-	//Used from the results view to redo the questionnaire
-	public void redoQuestionnaire() {
-		editAnswer("kindOfOrganisation");
-	}
-	
 	//Used by result view when choosing to display one of the resources
-	public String displayResource(Resource r) {
+	public void displayResource(Resource r) {
 		String ret = "";
 		ImageIcon img = null;
 		switch (r) {
 		case Schedule:
 			ret = "Schedule";
-			img = Model.getScheduleTemporary(scenario);
+			img = Model.getSchedulePreview(scenario);
 			break;
 		case Chart:
 			ret = "Organization chart";
-			img = Model.getOrgChartTemporary(scenario);
+			img = Model.getOrgChartPreview(scenario);
 			break;
 		case ReqList:
 			ret = "Requirements list";
-			img = Model.getReqListTemporary(scenario);
+			img = Model.getReqListPreview(scenario);
 			break;
 		case ReqModel:
 			ret = "Requirements model";
-			img = Model.getReqModelTemporary(scenario);
+			img = Model.getReqModelPreview(scenario);
 			break;
 		case ProcModel:
 			ret = "Processes model";
-			img = Model.getProcModelTemporary(scenario);
+			img = Model.getProcModelPreview(scenario);
 			break;
 		}
 		resourcesView = new ResourcesView(this);
 		resourcesView.startResourcesView(ret, img);
 		resultView.closeResultView();
 		currentView = View.Resources;
-		return ret;
 	}
 	
 	//Used by ResourcesView when the user asks to modify a file
