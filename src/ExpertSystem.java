@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 
 import gnu.prolog.database.PrologTextLoaderError;
 import gnu.prolog.demo.mentalarithmetic.NoAnswerException;
@@ -86,17 +85,20 @@ public class ExpertSystem {
 	/**
 	 * Write the knowledge in a Prolog file.
 	 */
-    private void writeKnowledge() 
-	{ 
-    	System.out.println("PATH : " + ExpertSystem.class.getResource("./").getFile());
-		//String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
+    public void writeKnowledge(String path) 
+	{  	
 		try { 
-		   	FileWriter fw = new FileWriter("Lib/knowledge.pl", false); 
+			FileWriter fw = null;
+			if (path == null) {
+				fw = new FileWriter("Lib/knowledge.pl", false);
+	    	}
+			else {
+		    	System.out.println("[DEBUG] Path to save : " + path);
+				fw = new FileWriter(path);
+			}
 		  	BufferedWriter output = new BufferedWriter(fw); 
-		  	//System.out.println("[DEBUG] Writing in knowledge.pl : ");
 		  	for(int i = 0; i < NBCRITERIA; i++) {
 		  		output.write(this.knowledge[0][i] + "(" + this.knowledge[1][i] + ").\n");
-		  		//System.out.println("\t" + this.knowledge[0][i] + "(" + this.knowledge[1][i] + ").");
 	    	 }
 		  	output.flush(); 
 		  	output.close(); 
@@ -107,13 +109,18 @@ public class ExpertSystem {
  	}
     
     /**
-	 * Read the knowledge from knowledge.pl.
+	 * Read the knowledge from a Prolog file.
 	 */
-    public void readKnowledge() 
+    public void readKnowledge(String path) 
 	{ 
-		//String file = ExpertSystem.class.getResource("knowledge.pl").getFile(); 
 		try { 
-		   	FileReader fr = new FileReader("Lib/knowledge.pl"); 
+			FileReader fr = null;
+			if (path == null) {
+				fr = new FileReader("Lib/knowledge.pl"); 
+			} else {
+				System.out.println("[DEBUG] Path to open : " + path);
+				fr = new FileReader(path);
+			}
 		  	BufferedReader input = new BufferedReader(fr);
 		  	String line;
 		  	while ((line = input.readLine()) != null) {
@@ -179,7 +186,7 @@ public class ExpertSystem {
 	 */
 	public String reason() throws PrologException, NoAnswerException
 	{
-		this.writeKnowledge();
+		this.writeKnowledge(null);
 		this.setup();
 		// // Construct the question.
 		// Create variable terms so that we can pull the answers out later
@@ -224,13 +231,15 @@ public class ExpertSystem {
 
 	/* * * * * M A I N * * * * */
 	
+	/*
 	// Test the ExpertSystem class with an example
 	public static void main(String[] args)
 	{
 		ExpertSystem expertSystem = new ExpertSystem();
 		HashMap<String, Question> questions = Question.getQuestions();
 		expertSystem.printKnowledge();
-		expertSystem.readKnowledge();
+		expertSystem.readKnowledge(null);
 		expertSystem.printKnowledge();
 	}
+	*/
 }

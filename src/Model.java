@@ -1,10 +1,6 @@
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Model {
@@ -63,9 +59,7 @@ public class Model {
 	}
 	
 	/* * * * * M E T H O D S - F I L E * * * * */
-	
-	//TODO Trouver comment enregistrer un fichier en mode lecture seule
-	
+		
 	/**
 	 * Return a File representing the corresponding requirements list
 	 */

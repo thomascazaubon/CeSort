@@ -164,16 +164,18 @@ public class Controller {
 	}
 	
 	//Used when clicking save on the results view, allows the user to specify
-	//a place where the project has to be saved.
-	//Creates a specific file that contains the data of the ExpertSystem
-	public void saveResults() {
-		//TODO
+	//a place where the project has to be saved (path).
+	//Creates a specific file that contains the data of the ExpertSystem : knowledge.pl.
+	public void saveResults(String path) {
+		//TODO To be tested
+		expertSystem.writeKnowledge(path);
 	}
 	
 	//Used when clicking load on the welcome view, allows the user to load a previous project
 	//Return the HashMap<questionTitle, answerTitle>
-	public HashMap<String, String> loadResults(String url) {
-		//TODO : Copy the file at the given URL in knowledge.pl
+	public HashMap<String, String> loadResults(String path) {
+		//TODO To be tested
+		expertSystem.readKnowledge(path);
 		// answers = <questionTitle, answerTitle>
 		HashMap<String,String> answers = new HashMap<String, String>();
 		// keyAnswers = <keyQuestion, keyAnswer>
@@ -272,31 +274,31 @@ public class Controller {
 					desktop.open(file);
 				} catch (IOException e) {
 					System.out.println("[ERROR] "); e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					switch (res) {
+					case "Schedule":
+						System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
+						resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
+						break;
+					case "Organization chart":
+						System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+						resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+						break;
+					case "Requirements list":
+						System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
+						resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
+						break;
+					case "Requirements model":
+						System.out.println("[ERROR] You need the TTool application to modify this file.");
+						resourcesView.displayError("You need the TTool application to modify this file.");
+						break;
+					case "Processes model":
+						System.out.println("[ERROR] You need the TTool application to modify this file.");
+						resourcesView.displayError("You need the TTool application to modify this file.");
+						break;
+					}
+					System.out.println("[ERROR] "); e.printStackTrace();
 				}
-			}
-		} else {
-			//TODO Uncomment when resourcesView.displayError will be implemented.
-			switch (res) {
-			case "Schedule":
-				System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
-				resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
-				break;
-			case "Organization chart":
-				System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
-				resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
-				break;
-			case "Requirements list":
-				System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
-				resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
-				break;
-			case "Requirements model":
-				System.out.println("[ERROR] You need the TTool application to modify this file.");
-				resourcesView.displayError("You need the TTool application to modify this file.");
-				break;
-			case "Processes model":
-				System.out.println("[ERROR] You need the TTool application to modify this file.");
-				resourcesView.displayError("You need the TTool application to modify this file.");
-				break;
 			}
 		}
 	}
