@@ -71,7 +71,7 @@ public class Model {
 	 */
 	public static File getReqList(int scenario) {
 		File reqList = null;
-		reqList = new File("Resources/" + scenario + "/reqList.xslx");
+		reqList = new File("Resources/" + scenario + "/reqList.xlsx");
 		return reqList;
 	}
 	
