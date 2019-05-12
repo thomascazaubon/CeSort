@@ -7345,7 +7345,7 @@
 											"top": 499.5,
 											"width": 86,
 											"height": 13,
-											"text": "Open projects"
+											"text": "Open project"
 										},
 										{
 											"_type": "LabelView",
@@ -7381,7 +7381,7 @@
 									"font": "Arial;13;0",
 									"left": 500.5,
 									"top": 492.5,
-									"width": 97.4072265625,
+									"width": 96,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFqZXwuHrtjN8I="
@@ -10294,7 +10294,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Open projects"
+					"name": "Open project"
 				},
 				{
 					"_type": "UMLUseCase",
