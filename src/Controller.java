@@ -2,9 +2,13 @@
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.swing.ImageIcon;
 
@@ -194,11 +198,21 @@ public class Controller {
 	
 	//Used when clicking on download on the results view
 	//Downloads all resources in a zip archive
-	public void downloadResources() {
-		/*
-		ProjectFilePanel panelSchedule = new ProjectFilePanel(schedule);
-		panelSchedule.saveFile(schedule, "mpp");
-		*/
+	public void downloadResources(String path) {
+		
+		ZipEntry schedule = new ZipEntry("schedule.xlsx");
+		ZipEntry reqList = new ZipEntry("reqList.xlsx");
+		ZipEntry orgChart = new ZipEntry("orgChart.xlsx");
+		try {
+			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(path));
+			zip.putNextEntry(schedule);
+			zip.putNextEntry(reqList);
+			zip.putNextEntry(orgChart);
+			zip.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//Used by result view when choosing to display one of the resources

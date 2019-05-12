@@ -3,6 +3,6 @@ bin
 .project
 .settings
 CeSort.jar
-CeSort.zip
+*.zip
 Lib/knowledge.pl
 CeSort
