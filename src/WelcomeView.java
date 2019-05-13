@@ -6,10 +6,13 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Font;
 
 public class WelcomeView extends JFrame {
@@ -112,6 +115,10 @@ public class WelcomeView extends JFrame {
 		btnLoadProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter ff = new FileNameExtensionFilter("CeSort", "cesort");
+				chooser.addChoosableFileFilter(ff);
+				chooser.setFileFilter(ff);
+				chooser.setDialogTitle("Load previous project");
 				chooser.showOpenDialog(welcomePanel);
 				String loadPath = chooser.getSelectedFile().getAbsolutePath();
 				cont.loadResults(loadPath);

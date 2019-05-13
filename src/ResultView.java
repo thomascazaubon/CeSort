@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -119,7 +122,9 @@ public class ResultView extends JFrame {
 		btnDownload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
+				chooser.setDialogTitle("Download project");
 				chooser.showSaveDialog(panel);
+
 				String downloadPath = chooser.getSelectedFile().getAbsolutePath();
 				controller.downloadResources(downloadPath);
 			}
@@ -135,6 +140,11 @@ public class ResultView extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
+				chooser.setSelectedFile(new File("CeSortProject.cesort"));
+				FileNameExtensionFilter ff = new FileNameExtensionFilter("CeSort", "cesort");
+				chooser.addChoosableFileFilter(ff);
+				chooser.setFileFilter(ff);
+				chooser.setDialogTitle("Save project");
 				chooser.showSaveDialog(panel);
 				String savePath = chooser.getSelectedFile().getAbsolutePath();
 				controller.saveResults(savePath);
