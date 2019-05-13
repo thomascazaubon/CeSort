@@ -120,8 +120,9 @@ public class WelcomeView extends JFrame {
 				chooser.setFileFilter(ff);
 				chooser.setDialogTitle("Load previous project");
 				chooser.showOpenDialog(welcomePanel);
-				String loadPath = chooser.getSelectedFile().getAbsolutePath();
-				cont.loadResults(loadPath);
+				if(chooser.getSelectedFile().getAbsolutePath() != null) {
+					cont.loadResults(chooser.getSelectedFile().getAbsolutePath());
+				}
 			}
 		});
 		welcomePanel.add(btnLoadProject);

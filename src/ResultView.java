@@ -124,9 +124,9 @@ public class ResultView extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				chooser.setDialogTitle("Download project");
 				chooser.showSaveDialog(panel);
-
-				String downloadPath = chooser.getSelectedFile().getAbsolutePath();
-				controller.downloadResources(downloadPath);
+				if(chooser.getSelectedFile().getAbsolutePath() != null) {
+					controller.loadResults(chooser.getSelectedFile().getAbsolutePath());
+				}
 			}
 		});
 		panel.add(btnDownload);
@@ -146,8 +146,9 @@ public class ResultView extends JFrame {
 				chooser.setFileFilter(ff);
 				chooser.setDialogTitle("Save project");
 				chooser.showSaveDialog(panel);
-				String savePath = chooser.getSelectedFile().getAbsolutePath();
-				controller.saveResults(savePath);
+				if(chooser.getSelectedFile().getAbsolutePath() != null) {
+					controller.loadResults(chooser.getSelectedFile().getAbsolutePath());
+				}
 			}
 		});
 		btnSave.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
