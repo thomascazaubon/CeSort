@@ -1,0 +1,12 @@
+kindOfOrganisation(oem).
+kindOfProduct(aircraft).
+headOfficeInEU(yes).
+weight(moreThan2T).
+standardPart(_).
+mainResponsabilities(_).
+typeCertificate(no).
+requestModification(no).
+nextTarget(tcAndCoA).
+modificationRequestOrNexProgram(_).
+privilegeFromEASA(no).
+operationalConditionsMightBeRestricted(no).

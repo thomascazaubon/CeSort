@@ -80,30 +80,31 @@ public class ResourcesView extends JFrame {
 		imageRes.setOpaque(false);
 	    panel.add(imageRes);
 	    
-	    JButton btnNewButton = new JButton("Open to modify");
-	    btnNewButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		controller.modifyResource(res);
-	    	}
-	    });
-	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
-	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
-	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -73, SpringLayout.SOUTH, panel);
-	    layout.putConstraint(SpringLayout.EAST, btnNewButton, -151, SpringLayout.EAST, panel);
-	    panel.add(btnNewButton);
-	    
 	    JLabel error = new JLabel("");
 	    layout.putConstraint(SpringLayout.NORTH, error, 16, SpringLayout.SOUTH, btnResults);
 	    layout.putConstraint(SpringLayout.WEST, error, 57, SpringLayout.WEST, panel);
 	    layout.putConstraint(SpringLayout.SOUTH, error, -10, SpringLayout.SOUTH, panel);
 	    layout.putConstraint(SpringLayout.EAST, error, 536, SpringLayout.WEST, panel);
 	    panel.add(error);
+	    
+	    JButton btnNewButton = new JButton("Open to modify");
+	    btnNewButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		controller.modifyResource(res);
+	    	}});
+	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
+	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
+	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -73, SpringLayout.SOUTH, panel);
+	    layout.putConstraint(SpringLayout.EAST, btnNewButton, -151, SpringLayout.EAST, panel);
+	    panel.add(btnNewButton);
+	    
 		
 		panel.repaint();
 		panel.revalidate();
 	}
 	
 	public void displayError(String txtError) {
+		System.out.println(txtError);
 		error.setText(txtError);
 	}
 	
