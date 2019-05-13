@@ -124,7 +124,7 @@ public class ResultView extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				chooser.setDialogTitle("Download project");
 				chooser.showSaveDialog(panel);
-				if(chooser.getSelectedFile().getAbsolutePath() != null) {
+				if(chooser.getSelectedFile() != null) {
 					controller.loadResults(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
@@ -146,8 +146,8 @@ public class ResultView extends JFrame {
 				chooser.setFileFilter(ff);
 				chooser.setDialogTitle("Save project");
 				chooser.showSaveDialog(panel);
-				if(chooser.getSelectedFile().getAbsolutePath() != null) {
-					controller.loadResults(chooser.getSelectedFile().getAbsolutePath());
+				if(chooser.getSelectedFile() != null) {
+					controller.saveResults(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
 		});

@@ -118,9 +118,10 @@ public class WelcomeView extends JFrame {
 				FileNameExtensionFilter ff = new FileNameExtensionFilter("CeSort", "cesort");
 				chooser.addChoosableFileFilter(ff);
 				chooser.setFileFilter(ff);
+				chooser.cancelSelection();
 				chooser.setDialogTitle("Load previous project");
 				chooser.showOpenDialog(welcomePanel);
-				if(chooser.getSelectedFile().getAbsolutePath() != null) {
+				if(chooser.getSelectedFile() != null) {
 					cont.loadResults(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
