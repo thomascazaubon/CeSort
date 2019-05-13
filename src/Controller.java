@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -203,6 +205,7 @@ public class Controller {
 	//Used when clicking on download on the results view
 	//Downloads all resources in a zip archive
 	public void downloadResources(String str) {
+		//Correcting the input extension
 		String path = str.split("\\.")[0] + ".zip";
 		try {
 			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(path));
@@ -211,7 +214,6 @@ public class Controller {
 			}
 			zip.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -268,12 +270,6 @@ public class Controller {
 			file = Model.getProcModel(scenario);
 			break;
 		}
-		
-		if (file == null) {
-			System.out.println("[ERROR] The file to modify doesn't exist.");
-			resourcesView.displayError("The file to modify doesn't exist.");
-		}
-		
 		Desktop desktop = null;
 		if (Desktop.isDesktopSupported()) {
 			System.out.println("[DEBUG] Desktop is supported.");
@@ -313,16 +309,18 @@ public class Controller {
 		}
 	}
 	
+	//To return to the result view from the resource view
 	public void backToResults() {
 		resourcesView.closeResourcesView();
-		
 		resultView = new ResultView(this);
 		resultView.startResultView(getStrings());
 		currentView = View.Result;
 	}
 	
+	//To get both the questions and answers in natural languages (without their associated keys)
 	private HashMap<String,String> getStrings(){
         HashMap<String,String> keys = expertSystem.getKeyAnswers();
+        //questions.get(keyQuestion) = Question
         HashMap<String,String> strings = new HashMap<String,String>();
         for (Map.Entry<String, String> keyEntry : keys.entrySet()) {
             String keyQuestion = keyEntry.getKey();
@@ -333,7 +331,7 @@ public class Controller {
         return strings;
     }
 
-	
+	//To get the key associated to an answer
 	private String getKeyWithString(String answer) {
 		String ret = "";
 		Question current = questions.get(keyCurrentQuestion);
@@ -345,10 +343,12 @@ public class Controller {
 		return ret;
 	}
 	
+	//Adds the specified resource to the provided zip
 	private void copyFileInZip(Resource res, ZipOutputStream zos) {
 		int len;
 		byte[] buffer = new byte[1024];
 		File f = null;
+		//Retrieving the associated file from Model
 		switch(res) {
 		case Schedule:
 			f = Model.getSchedule(scenario);
@@ -367,12 +367,16 @@ public class Controller {
 			break;
 		}
 		try {
+			//Creating a file input input stream from file
 			FileInputStream in = new FileInputStream(f);
+			//Adds an entry to the zip
 			ZipEntry ze = new ZipEntry(f.getName());
 			zos.putNextEntry(ze);
+			//Copy the file into the entry
 			while((len = in.read(buffer)) > 0) {
 				zos.write(buffer,0,len);
 			}
+			//Close both the input stream and the zip entry to proceed to the next one
 			in.close();
 			zos.closeEntry();
 		} catch (IOException e) {
