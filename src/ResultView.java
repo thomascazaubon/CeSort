@@ -284,8 +284,9 @@ public class ResultView extends JFrame {
 		if(listQA.values() != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>" + question + "<html>");
-				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
+				newAnswer.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				JLabel br = new JLabel(" -----");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);

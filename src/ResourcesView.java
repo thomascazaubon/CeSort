@@ -2,6 +2,8 @@
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,7 @@ import javax.swing.SpringLayout;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Font;
-import java.awt.Image;
+//import java.awt.Image;
 
 public class ResourcesView extends JFrame {
 	static final long serialVersionUID = 1L;
@@ -32,6 +34,9 @@ public class ResourcesView extends JFrame {
 	
 	private String res;
 	private ImageIcon imageIcon; 
+	private JPanel imgPanel;
+	//private BoxLayout imgLayout;
+	private JScrollPane imgScroll;
 
 	private Controller controller;
 	private JLabel imageRes;
@@ -86,17 +91,31 @@ public class ResourcesView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, lblResource, 27, SpringLayout.WEST, panel);
 		panel.add(lblResource);
 
+		
+		imgPanel = new JPanel();
+		imgScroll = new JScrollPane(imgPanel);
+		layout.putConstraint(SpringLayout.NORTH, imgScroll, 20, SpringLayout.NORTH, lblResource);
+		layout.putConstraint(SpringLayout.WEST, imgScroll, 25, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.SOUTH, imgScroll, -30, SpringLayout.NORTH, btnResults);
+		layout.putConstraint(SpringLayout.EAST, imgScroll, -33, SpringLayout.EAST, panel);
+		//imgLayout = new BoxLayout(imgScroll, BoxLayout.Y_AXIS);
+		imgScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		imgScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		//imgPanel.setLayout(imgLayout);
+		panel.add(imgScroll);
+		
 		imageRes = new JLabel();
-		layout.putConstraint(SpringLayout.NORTH, btnResults, 18, SpringLayout.SOUTH, imageRes);
-		layout.putConstraint(SpringLayout.NORTH, imageRes, 26, SpringLayout.NORTH, panel);
-		layout.putConstraint(SpringLayout.WEST, imageRes, 25, SpringLayout.WEST, panel);
-		layout.putConstraint(SpringLayout.SOUTH, imageRes, -121, SpringLayout.SOUTH, panel);
-		layout.putConstraint(SpringLayout.EAST, imageRes, -33, SpringLayout.EAST, panel);
-		Image imgScaled = imageIcon.getImage().getScaledInstance(540, 350, Image.SCALE_SMOOTH);
-		imageIcon = new ImageIcon(imgScaled);
+		layout.putConstraint(SpringLayout.SOUTH, btnResults, -73, SpringLayout.SOUTH, panel);
+		//layout.putConstraint(SpringLayout.NORTH, imageRes, 20, SpringLayout.NORTH, lblResource);
+		//layout.putConstraint(SpringLayout.WEST, imageRes, 25, SpringLayout.WEST, panel);
+		//layout.putConstraint(SpringLayout.SOUTH, imageRes, -30, SpringLayout.NORTH, btnResults);
+		//layout.putConstraint(SpringLayout.EAST, imageRes, -33, SpringLayout.EAST, panel);
+		//Image imgScaled = imageIcon.getImage().getScaledInstance(540, 350, Image.);
+		//imageIcon = new ImageIcon(imgScaled);
 		imageRes.setIcon(imageIcon);
 		imageRes.setOpaque(false);
-	    panel.add(imageRes);
+	    imgPanel.add(imageRes);
 	    
 	    JLabel error = new JLabel("");
 	    layout.putConstraint(SpringLayout.NORTH, error, 16, SpringLayout.SOUTH, btnResults);
@@ -110,35 +129,44 @@ public class ResourcesView extends JFrame {
 	    	public void actionPerformed(ActionEvent e) {
 	    		JFileChooser chooser = new JFileChooser();
 	    		FileNameExtensionFilter ff = null;
-	    		switch (res) {
-				case "Schedule":
-					chooser.setSelectedFile(new File("schedule.xlsx"));
-					ff = new FileNameExtensionFilter("Excel", "xlsx");
-					break;
-				case "Organization chart":
-					chooser.setSelectedFile(new File("orgChart.pptx"));
-					ff = new FileNameExtensionFilter("PowerPoint", "pptx");
-					break;
-				case "Requirements list":
-					chooser.setSelectedFile(new File("reqList.xlsx"));
-					ff = new FileNameExtensionFilter("Excel", "xlsx");
-					break;
-				case "Requirements model":
-					chooser.setSelectedFile(new File("reqModel.xml"));
-					ff = new FileNameExtensionFilter("XML", "xml");
-					break;
-				case "Processes model":
-					chooser.setSelectedFile(new File("procModel.xml"));
-					ff = new FileNameExtensionFilter("XML", "xml");
-					break;
-				}
-				chooser.addChoosableFileFilter(ff);
-				chooser.setFileFilter(ff);
-				chooser.setDialogTitle("Save project");
-				chooser.showSaveDialog(panel);
-				if(chooser.getSelectedFile() != null) {
-					//controller.modifyResource(res, chooser.getSelectedFile().getAbsolutePath());
-				}}});
+
+	    		boolean isPathSet = controller.isPathSet(res);
+	    		if(!isPathSet) {
+		    		switch (res) {
+					case "Schedule":
+						chooser.setSelectedFile(new File("schedule.xlsx"));
+						ff = new FileNameExtensionFilter("Excel", "xlsx");
+						break;
+					case "Organization chart":
+						chooser.setSelectedFile(new File("orgChart.pptx"));
+						ff = new FileNameExtensionFilter("PowerPoint", "pptx");
+						break;
+					case "Requirements list":
+						chooser.setSelectedFile(new File("reqList.xlsx"));
+						ff = new FileNameExtensionFilter("Excel", "xlsx");
+						break;
+					case "Requirements model":
+						chooser.setSelectedFile(new File("reqModel.xml"));
+						ff = new FileNameExtensionFilter("XML", "xml");
+						break;
+					case "Processes model":
+						chooser.setSelectedFile(new File("procModel.xml"));
+						ff = new FileNameExtensionFilter("XML", "xml");
+						break;
+					}
+		    		
+					chooser.addChoosableFileFilter(ff);
+					chooser.setFileFilter(ff);
+					chooser.setDialogTitle("Open to mdify");
+					chooser.showSaveDialog(panel);
+					
+					if(chooser.getSelectedFile() != null) {
+						controller.modifyResource(res, chooser.getSelectedFile().getAbsolutePath());
+					}
+	    		} else {
+	    			controller.modifyResource(res, null);
+	    		}
+				}});
 	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
 	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
 	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -73, SpringLayout.SOUTH, panel);
