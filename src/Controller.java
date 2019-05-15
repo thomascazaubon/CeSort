@@ -3,11 +3,8 @@
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -161,11 +158,6 @@ public class Controller {
 	public Question editAnswer(String keyQuestion) {
 		keyCurrentQuestion = keyQuestion;
 		return questions.get(keyQuestion);
-	}
-	
-	//[optional]
-	public void changeLanguage(Language L) {
-		//TODO
 	}
 	
 	//Used when clicking save on the results view, 
@@ -406,7 +398,6 @@ public class Controller {
 			fis.close();
 			fos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
 		return correctedPath;
