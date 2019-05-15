@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
@@ -54,7 +57,17 @@ public class ResultView extends JFrame {
 	
 	public ResultView(Controller c) {
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				int result = JOptionPane.showConfirmDialog(null,
+			            "Do you want to Exit ?", "Confirm exit",
+			            JOptionPane.YES_NO_OPTION);
+			        if (result == JOptionPane.YES_OPTION)
+			        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			        else if (result == JOptionPane.NO_OPTION)
+			        	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			}
+		});
 		
 		this.controller = c;
 		

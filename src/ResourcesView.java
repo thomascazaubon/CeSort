@@ -6,12 +6,15 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -36,7 +39,17 @@ public class ResourcesView extends JFrame {
 	/* * * * * C O N S T R U C T O R * * * * */
 	
 	public ResourcesView(Controller c) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				int result = JOptionPane.showConfirmDialog(null,
+			            "Do you want to Exit ?", "Confirm exit",
+			            JOptionPane.YES_NO_OPTION);
+			        if (result == JOptionPane.YES_OPTION)
+			        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			        else if (result == JOptionPane.NO_OPTION)
+			        	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			}
+		});
 		
 		this.controller = c;
 		
@@ -124,7 +137,7 @@ public class ResourcesView extends JFrame {
 				chooser.setDialogTitle("Save project");
 				chooser.showSaveDialog(panel);
 				if(chooser.getSelectedFile() != null) {
-					controller.modifyResource(res, chooser.getSelectedFile().getAbsolutePath());
+					//controller.modifyResource(res, chooser.getSelectedFile().getAbsolutePath());
 				}}});
 	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
 	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
