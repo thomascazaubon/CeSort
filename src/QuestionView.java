@@ -8,12 +8,15 @@ import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
@@ -53,7 +56,17 @@ public class QuestionView extends JFrame {
 	/* * * * * C O N S T R U C T O R * * * * */
 	
 	public QuestionView(Controller c) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				int result = JOptionPane.showConfirmDialog(null,
+			            "Do you want to Exit ?", "Confirm exit",
+			            JOptionPane.YES_NO_OPTION);
+			        if (result == JOptionPane.YES_OPTION)
+			        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			        else if (result == JOptionPane.NO_OPTION)
+			        	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			}
+		});
 		
 		this.controller = c;
 		
@@ -194,9 +207,11 @@ public class QuestionView extends JFrame {
 		if(listQA != null) {
 			for(String question : listQA.keySet()) {
 				JLabel newQuestion = new JLabel("<html>"+question+"<html>");
-				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
+				newAnswer.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				JLabel br = new JLabel(" -----");
+				br.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
 				previousQuestionsPanel.add(br);
