@@ -138,7 +138,7 @@ public class ResultView extends JFrame {
 				chooser.setDialogTitle("Download project");
 				chooser.showSaveDialog(panel);
 				if(chooser.getSelectedFile() != null) {
-					controller.loadResults(chooser.getSelectedFile().getAbsolutePath());
+					controller.downloadResources(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
 		});
