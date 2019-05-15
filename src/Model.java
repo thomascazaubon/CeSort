@@ -105,4 +105,26 @@ public class Model {
 		return orgChart;
 	}
 	
+	public static File getResource(Resource res, int scenario) {
+		File file = null;
+		switch(res) {
+		case Schedule:
+			file = new File("Resources/" + scenario + "/schedule.xlsx");
+			break;
+		case Chart:
+			file = new File("Resources/" + scenario + "/orgChart.pptx");
+			break;
+		case ReqList:
+			file = new File("Resources/" + scenario + "/reqList.xlsx");
+			break;
+		case ReqModel:
+			file = new File("Resources/" + scenario + "/reqModel.xml");
+			break;
+		case ProcModel:
+			file = new File("Resources/" + scenario + "/procModel.xml");
+			break;
+		}
+		return file;
+	}
+	
 }

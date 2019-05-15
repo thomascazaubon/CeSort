@@ -3,6 +3,7 @@
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
@@ -256,7 +257,6 @@ public class Controller {
 	public void modifyResource(String res, String path) {
 		Resource resource = null;
 		File file = null;
-		boolean exists = false;
 		switch (res) {
 		case "Schedule":
 			resource = Resource.Schedule;
@@ -274,49 +274,56 @@ public class Controller {
 			resource = Resource.ProcModel;
 			break;
 		}
+		//If the resource has already been modified
 		if (paths.get(resource) != null) {
 			path = paths.get(resource);
+		//Else the resource is copied to the provided path
 		} else {
 			path = copyFile(resource, path);
 			paths.put(resource, path);
 		}
-		file = new File(path);
-		Desktop desktop = null;
-		if (Desktop.isDesktopSupported()) {
-			System.out.println("[DEBUG] Desktop is supported.");
-			desktop = Desktop.getDesktop();
-			if (desktop.isSupported(Desktop.Action.OPEN)) {
-				System.out.println("[DEBUG] Desktop.Action.open is supported.");
-				try {
-					desktop.open(file);
-				} catch (IOException e) {
-					System.out.println("[ERROR] "); e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					switch (res) {
-					case "Schedule":
-						System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
-						resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
-						break;
-					case "Organization chart":
-						System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
-						resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
-						break;
-					case "Requirements list":
-						System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
-						resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
-						break;
-					case "Requirements model":
-						System.out.println("[ERROR] You need the TTool application to modify this file.");
-						resourcesView.displayError("You need the TTool application to modify this file.");
-						break;
-					case "Processes model":
-						System.out.println("[ERROR] You need the TTool application to modify this file.");
-						resourcesView.displayError("You need the TTool application to modify this file.");
-						break;
+		//If the resource exists
+		if (path != null) {
+			file = new File(path);
+			Desktop desktop = null;
+			if (Desktop.isDesktopSupported()) {
+				System.out.println("[DEBUG] Desktop is supported.");
+				desktop = Desktop.getDesktop();
+				if (desktop.isSupported(Desktop.Action.OPEN)) {
+					System.out.println("[DEBUG] Desktop.Action.open is supported.");
+					try {
+						desktop.open(file);
+					} catch (IOException e) {
+						System.out.println("[ERROR] "); e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						switch (res) {
+						case "Schedule":
+							System.out.println("[ERROR] You need an application like MSProject or GanttProject to modify this file.");
+							resourcesView.displayError("You need an application like MSProject or GanttProject to modify this file.");
+							break;
+						case "Organization chart":
+							System.out.println("[ERROR] You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+							resourcesView.displayError("You need an application like PowerPoint or LibreOffice Impress to modify this file.");
+							break;
+						case "Requirements list":
+							System.out.println("[ERROR] You need an application like Excel or LibreOffice Calc to modify this file.");
+							resourcesView.displayError("You need an application like Excel or LibreOffice Calc to modify this file.");
+							break;
+						case "Requirements model":
+							System.out.println("[ERROR] You need the TTool application to modify this file.");
+							resourcesView.displayError("You need the TTool application to modify this file.");
+							break;
+						case "Processes model":
+							System.out.println("[ERROR] You need the TTool application to modify this file.");
+							resourcesView.displayError("You need the TTool application to modify this file.");
+							break;
+						}
+						System.out.println("[ERROR] "); e.printStackTrace();
 					}
-					System.out.println("[ERROR] "); e.printStackTrace();
 				}
 			}
+		} else {
+			System.out.println("[ERROR] File does not exists !");
 		}
 	}
 	
@@ -398,17 +405,51 @@ public class Controller {
 	private String copyFile(Resource res, String path) {
 		byte[] buffer = new byte[1024];
 		int length;
-		File file = Model.getResource(res);
-		FileInputStream fis = new FileInputStream(file);
-		//Replacing path with the correct extension
-		String correctedPath = path.split("\\.")[0] + file.getPath().split("\\.")[1];
-		FileOutputStream fos = new FileOutputStream(correctedPath);
-		while ((length = fis.read(buffer)) != 0) {
-			fos.write(buffer, 0, length);
+		String correctedPath = null;
+		File file = Model.getResource(res, scenario);
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			//Replacing path with the correct extension
+			correctedPath = path.split("\\.")[0] + file.getPath().split("\\.")[1];
+			FileOutputStream fos = new FileOutputStream(correctedPath);
+			while ((length = fis.read(buffer)) != 0) {
+				fos.write(buffer, 0, length);
+			}
+			fis.close();
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 		}
-		fis.close();
-		fos.close();
 		return correctedPath;
+	}
+	
+	//Tells the resultView if a resource has already been modified
+	public boolean isPathSet(String res) {
+		Resource resource = null;
+		boolean set = false;
+		switch(res) {
+		case "Schedule":
+			resource = Resource.Schedule;
+			break;
+		case "Organization chart":
+			resource = Resource.Chart;
+			break;
+		case "Requirements list":
+			resource = Resource.ReqList;
+			break;
+		case "Requirements model":
+			resource = Resource.ReqModel;
+			break;
+		case "Processes model":
+			resource = Resource.ProcModel;
+			break;
+		}
+		if (paths.get(resource) != null) {
+			set = true;
+		}
+		return set;
 	}
 }
 
