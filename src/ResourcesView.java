@@ -130,8 +130,7 @@ public class ResourcesView extends JFrame {
 	    		JFileChooser chooser = new JFileChooser();
 	    		FileNameExtensionFilter ff = null;
 
-	    		boolean isPathSet = controller.isPathSet(res);
-	    		if(!isPathSet) {
+	    		if(!controller.isPathSet(res)) {
 		    		switch (res) {
 					case "Schedule":
 						chooser.setSelectedFile(new File("schedule.xlsx"));

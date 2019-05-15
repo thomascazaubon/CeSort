@@ -411,9 +411,9 @@ public class Controller {
 		try {
 			fis = new FileInputStream(file);
 			//Replacing path with the correct extension
-			correctedPath = path.split("\\.")[0] + file.getPath().split("\\.")[1];
+			correctedPath = path.split("\\.")[0] + "." + file.getPath().split("\\.")[1];
 			FileOutputStream fos = new FileOutputStream(correctedPath);
-			while ((length = fis.read(buffer)) != 0) {
+			while ((length = fis.read(buffer)) > 0) {
 				fos.write(buffer, 0, length);
 			}
 			fis.close();
