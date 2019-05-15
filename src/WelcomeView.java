@@ -142,17 +142,6 @@ public class WelcomeView extends JFrame {
 		});
 		welcomePanel.add(btnLoadProject);
 		
-		JButton btnChangeLanguage = new JButton("Change Language");
-		btnChangeLanguage.setForeground(new Color(128, 128, 128));
-		layout.putConstraint(SpringLayout.NORTH, btnChangeLanguage, 10, SpringLayout.NORTH, welcomePanel);
-		layout.putConstraint(SpringLayout.EAST, btnChangeLanguage, -10, SpringLayout.EAST, welcomePanel);
-		btnChangeLanguage.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Nothing yet.
-			}
-		});
-		welcomePanel.add(btnChangeLanguage);
-		
 		welcomePanel.repaint();
 		welcomePanel.revalidate();
 	}

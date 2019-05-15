@@ -243,7 +243,7 @@ public class Controller {
 			img = Model.getReqModelPreview(scenario);
 			break;
 		case ProcModel:
-			ret = "Processes model";
+			ret = "Process models";
 			img = Model.getProcModelPreview(scenario);
 			break;
 		}
@@ -270,7 +270,7 @@ public class Controller {
 		case "Requirements model":
 			resource = Resource.ReqModel;
 			break;
-		case "Processes model":
+		case "Process models":
 			resource = Resource.ProcModel;
 			break;
 		}
@@ -313,7 +313,7 @@ public class Controller {
 							System.out.println("[ERROR] You need the TTool application to modify this file.");
 							resourcesView.displayError("You need the TTool application to modify this file.");
 							break;
-						case "Processes model":
+						case "Process models":
 							System.out.println("[ERROR] You need the TTool application to modify this file.");
 							resourcesView.displayError("You need the TTool application to modify this file.");
 							break;
@@ -442,7 +442,7 @@ public class Controller {
 		case "Requirements model":
 			resource = Resource.ReqModel;
 			break;
-		case "Processes model":
+		case "Process models":
 			resource = Resource.ProcModel;
 			break;
 		}

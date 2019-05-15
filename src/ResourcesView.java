@@ -149,7 +149,7 @@ public class ResourcesView extends JFrame {
 						chooser.setSelectedFile(new File("reqModel.xml"));
 						ff = new FileNameExtensionFilter("XML", "xml");
 						break;
-					case "Processes model":
+					case "Process models":
 						chooser.setSelectedFile(new File("procModel.xml"));
 						ff = new FileNameExtensionFilter("XML", "xml");
 						break;
