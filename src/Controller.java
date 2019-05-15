@@ -25,7 +25,8 @@ public class Controller {
 	int NUMBER_OF_RESOURCES = 5;
 
 	/* * * * * A T T R I B U T E S * * * * */
-		
+	//The list of paths associated to the resources
+	private HashMap<Resource, String> paths;
 	//The list of all available questions : <keyQuestion, Question>
 	private HashMap<String, Question> questions;
 	//All the answers provided until now, the key is the key of the question that they correspond to
@@ -49,6 +50,7 @@ public class Controller {
 		keyCurrentQuestion = null;
 		welcomeView.startWelcomeView();
 		currentView = View.Welcome;
+		paths = new HashMap<Resource,String>();
 	}
 	
 	/* * * * * M E T H O D S * * * * */
@@ -251,25 +253,34 @@ public class Controller {
 	}
 	
 	//Used by ResourcesView when the user asks to modify a file
-	public void modifyResource(String res) {
+	public void modifyResource(String res, String path) {
+		Resource resource = null;
 		File file = null;
+		boolean exists = false;
 		switch (res) {
 		case "Schedule":
-			file = Model.getSchedule(scenario);
+			resource = Resource.Schedule;
 			break;
 		case "Organization chart":
-			file = Model.getOrgChart(scenario);
+			resource = Resource.Chart;
 			break;
 		case "Requirements list":
-			file = Model.getReqList(scenario);
+			resource = Resource.ReqList;
 			break;
 		case "Requirements model":
-			file = Model.getReqModel(scenario);
+			resource = Resource.ReqModel;
 			break;
 		case "Processes model":
-			file = Model.getProcModel(scenario);
+			resource = Resource.ProcModel;
 			break;
 		}
+		if (paths.get(resource) != null) {
+			path = paths.get(resource);
+		} else {
+			path = copyFile(resource, path);
+			paths.put(resource, path);
+		}
+		file = new File(path);
 		Desktop desktop = null;
 		if (Desktop.isDesktopSupported()) {
 			System.out.println("[DEBUG] Desktop is supported.");
@@ -382,6 +393,22 @@ public class Controller {
 		} catch (IOException e) {
 			//e.printStackTrace();
 		}
+	}
+	
+	private String copyFile(Resource res, String path) {
+		byte[] buffer = new byte[1024];
+		int length;
+		File file = Model.getResource(res);
+		FileInputStream fis = new FileInputStream(file);
+		//Replacing path with the correct extension
+		String correctedPath = path.split("\\.")[0] + file.getPath().split("\\.")[1];
+		FileOutputStream fos = new FileOutputStream(correctedPath);
+		while ((length = fis.read(buffer)) != 0) {
+			fos.write(buffer, 0, length);
+		}
+		fis.close();
+		fos.close();
+		return correctedPath;
 	}
 }
 
