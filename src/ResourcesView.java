@@ -6,10 +6,15 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -90,8 +95,37 @@ public class ResourcesView extends JFrame {
 	    JButton btnNewButton = new JButton("Open to modify");
 	    btnNewButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		controller.modifyResource(res);
-	    	}});
+	    		JFileChooser chooser = new JFileChooser();
+	    		FileNameExtensionFilter ff = null;
+	    		switch (res) {
+				case "Schedule":
+					chooser.setSelectedFile(new File("schedule.xlsx"));
+					ff = new FileNameExtensionFilter("Excel", "xlsx");
+					break;
+				case "Organization chart":
+					chooser.setSelectedFile(new File("orgChart.pptx"));
+					ff = new FileNameExtensionFilter("PowerPoint", "pptx");
+					break;
+				case "Requirements list":
+					chooser.setSelectedFile(new File("reqList.xlsx"));
+					ff = new FileNameExtensionFilter("Excel", "xlsx");
+					break;
+				case "Requirements model":
+					chooser.setSelectedFile(new File("reqModel.xml"));
+					ff = new FileNameExtensionFilter("XML", "xml");
+					break;
+				case "Processes model":
+					chooser.setSelectedFile(new File("procModel.xml"));
+					ff = new FileNameExtensionFilter("XML", "xml");
+					break;
+				}
+				chooser.addChoosableFileFilter(ff);
+				chooser.setFileFilter(ff);
+				chooser.setDialogTitle("Save project");
+				chooser.showSaveDialog(panel);
+				if(chooser.getSelectedFile() != null) {
+					controller.modifyResource(res, chooser.getSelectedFile().getAbsolutePath());
+				}}});
 	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 1, SpringLayout.NORTH, btnResults);
 	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 124, SpringLayout.EAST, btnResults);
 	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -73, SpringLayout.SOUTH, panel);
