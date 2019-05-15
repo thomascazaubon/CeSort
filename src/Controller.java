@@ -366,23 +366,10 @@ public class Controller {
 		int len;
 		byte[] buffer = new byte[1024];
 		File f = null;
-		//Retrieving the associated file from Model
-		switch(res) {
-		case Schedule:
-			f = Model.getSchedule(scenario);
-			break;
-		case Chart:
-			f = Model.getOrgChart(scenario);
-			break;
-		case ReqList:
-			f = Model.getReqList(scenario);
-			break;
-		case ReqModel:
-			f = Model.getReqModel(scenario);
-			break;
-		case ProcModel:
-			f = Model.getProcModel(scenario);
-			break;
+		if (paths.get(res) != null) {
+			f = new File(paths.get(res));
+		} else {
+			f = Model.getResource(res, scenario);
 		}
 		try {
 			//Creating a file input input stream from file
