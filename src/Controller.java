@@ -3,11 +3,8 @@
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -161,11 +158,6 @@ public class Controller {
 	public Question editAnswer(String keyQuestion) {
 		keyCurrentQuestion = keyQuestion;
 		return questions.get(keyQuestion);
-	}
-	
-	//[optional]
-	public void changeLanguage(Language L) {
-		//TODO
 	}
 	
 	//Used when clicking save on the results view, 
@@ -366,23 +358,10 @@ public class Controller {
 		int len;
 		byte[] buffer = new byte[1024];
 		File f = null;
-		//Retrieving the associated file from Model
-		switch(res) {
-		case Schedule:
-			f = Model.getSchedule(scenario);
-			break;
-		case Chart:
-			f = Model.getOrgChart(scenario);
-			break;
-		case ReqList:
-			f = Model.getReqList(scenario);
-			break;
-		case ReqModel:
-			f = Model.getReqModel(scenario);
-			break;
-		case ProcModel:
-			f = Model.getProcModel(scenario);
-			break;
+		if (paths.get(res) != null) {
+			f = new File(paths.get(res));
+		} else {
+			f = Model.getResource(res, scenario);
 		}
 		try {
 			//Creating a file input input stream from file
@@ -419,7 +398,6 @@ public class Controller {
 			fis.close();
 			fos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
 		return correctedPath;

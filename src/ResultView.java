@@ -178,7 +178,6 @@ public class ResultView extends JFrame {
 			imageP.setOpaque(false);
 	        panel.add(imageP);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         
@@ -192,7 +191,6 @@ public class ResultView extends JFrame {
 			imageM.setOpaque(false);
 	        panel.add(imageM);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -206,7 +204,6 @@ public class ResultView extends JFrame {
 			imageR.setOpaque(false);
 	        panel.add(imageR);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -220,7 +217,6 @@ public class ResultView extends JFrame {
 			imageO.setOpaque(false);
 	        panel.add(imageO);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
