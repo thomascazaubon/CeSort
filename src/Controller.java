@@ -216,30 +216,36 @@ public class Controller {
 	
 	//Used by result view when choosing to display one of the resources
 	public void displayResource(Resource r) {
-		/*String ret = "";
-		ImageIcon img = null;
+		//String ret = "";
+		//ImageIcon img = null;
+		int num;
 		switch (r) {
 		case Schedule:
-			ret = "Schedule";
-			img = Model.getSchedulePreview(scenario);
+			num = 3;
+			//ret = "Schedule";
+			//img = Model.getSchedulePreview(scenario);
 			break;
 		case Chart:
-			ret = "Organization chart";
-			img = Model.getOrgChartPreview(scenario);
+			num = 4;
+			//ret = "Organization chart";
+			//img = Model.getOrgChartPreview(scenario);
 			break;
 		case ReqList:
-			ret = "Requirements list";
-			img = Model.getReqListPreview(scenario);
+			num = 0;
+			//ret = "Requirements list";
+			//img = Model.getReqListPreview(scenario);
 			break;
 		case ReqModel:
-			ret = "Requirements model";
-			img = Model.getReqModelPreview(scenario);
+			num = 1; 
+			//ret = "Requirements model";
+			//img = Model.getReqModelPreview(scenario);
 			break;
 		case ProcModel:
-			ret = "Process models";
-			img = Model.getProcModelPreview(scenario);
+			num = 2;
+			//ret = "Process models";
+			//img = Model.getProcModelPreview(scenario);
 			break;
-		}*/
+		}
 		
 		resourcesView = new ResourcesView(this);
 		ArrayList<String> titles = new ArrayList<String>();
@@ -249,7 +255,7 @@ public class Controller {
 		titles.add("Schedule");
 		titles.add("Organizational chart");
 		ArrayList<ImageIcon> previews = Model.getPreviews(scenario);
-		resourcesView.startResourcesView(titles, previews);
+		resourcesView.startResourcesView(num, titles, previews);
 		//resourcesView.startResourcesView(ret, img);
 		resultView.closeResultView();
 		currentView = View.Resources;
