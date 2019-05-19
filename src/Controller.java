@@ -218,7 +218,7 @@ public class Controller {
 	public void displayResource(Resource r) {
 		//String ret = "";
 		//ImageIcon img = null;
-		int num;
+		int num = 0;
 		switch (r) {
 		case Schedule:
 			num = 3;
