@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -215,7 +216,7 @@ public class Controller {
 	
 	//Used by result view when choosing to display one of the resources
 	public void displayResource(Resource r) {
-		String ret = "";
+		/*String ret = "";
 		ImageIcon img = null;
 		switch (r) {
 		case Schedule:
@@ -238,9 +239,18 @@ public class Controller {
 			ret = "Process models";
 			img = Model.getProcModelPreview(scenario);
 			break;
-		}
+		}*/
+		
 		resourcesView = new ResourcesView(this);
-		resourcesView.startResourcesView(ret, img);
+		ArrayList<String> titles = new ArrayList<String>();
+		titles.add("Requirements list");
+		titles.add("Requirements model");
+		titles.add("Process models");
+		titles.add("Schedule");
+		titles.add("Organizational chart");
+		ArrayList<ImageIcon> previews = Model.getPreviews(scenario);
+		resourcesView.startResourcesView(titles, previews);
+		//resourcesView.startResourcesView(ret, img);
 		resultView.closeResultView();
 		currentView = View.Resources;
 	}

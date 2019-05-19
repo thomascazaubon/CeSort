@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -56,6 +57,19 @@ public class Model {
 		ImageIcon orgChart = null;
 		orgChart = new ImageIcon("Resources/" + scenario + "/orgChart.png");
 		return orgChart;
+	}
+	
+	/**
+	 * Return all ImageIcon corresponding to the scenario
+	 */
+	public static ArrayList<ImageIcon> getPreviews(int scenario) {
+		ArrayList<ImageIcon> previews = new ArrayList<ImageIcon>(5);
+		previews.add(getReqListPreview(scenario));
+		previews.add(getReqModelPreview(scenario));
+		previews.add(getProcModelPreview(scenario));
+		previews.add(getSchedulePreview(scenario));
+		previews.add(getOrgChartPreview(scenario));
+		return previews;
 	}
 	
 	/* * * * * M E T H O D S - F I L E * * * * */
