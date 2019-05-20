@@ -9,8 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -47,6 +50,8 @@ public class ResourcesView extends JFrame {
 	private JButton btnProcess;
 	private JButton btnRequirementsModels;
 	
+	private ImageIcon logoCeSort;
+	
 	/* * * * * C O N S T R U C T O R * * * * */
 	
 	public ResourcesView(Controller c) {
@@ -63,6 +68,15 @@ public class ResourcesView extends JFrame {
 		});
 		
 		this.controller = c;
+		this.setTitle("CeSort");
+		FileInputStream fileR;
+		try {
+			fileR = new FileInputStream("Images/requirements.png");
+			logoCeSort = new ImageIcon(ImageIO.read(fileR));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		this.setIconImage(logoCeSort.getImage());
 		
 		panel = new JPanel();
 		layout = new SpringLayout();

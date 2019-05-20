@@ -53,6 +53,9 @@ public class ResultView extends JFrame {
 	private JButton btnOrganizationnalChart;
 	private JButton btnRequirements;
 	
+	private ImageIcon logoCeSort;
+
+	
 	/* * * * * C O N S T R U C T O R * * * * */
 	
 	public ResultView(Controller c) {
@@ -68,9 +71,17 @@ public class ResultView extends JFrame {
 			        	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			}
 		});
+		this.setTitle("CeSort");
 		
 		this.controller = c;
-		
+		FileInputStream fileR;
+		try {
+			fileR = new FileInputStream("Images/requirements.png");
+			logoCeSort = new ImageIcon(ImageIO.read(fileR));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		this.setIconImage(logoCeSort.getImage());
 		panel = new JPanel();
 		layout = new SpringLayout();
 		

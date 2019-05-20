@@ -10,10 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,6 +57,8 @@ public class QuestionView extends JFrame {
 	private JButton btnNextQuestion;
 	private JButton btnHome;
 	
+	private ImageIcon logoCeSort;
+	
 	/* * * * * C O N S T R U C T O R * * * * */
 	
 	public QuestionView(Controller c) {
@@ -69,7 +75,17 @@ public class QuestionView extends JFrame {
 		});
 		
 		this.controller = c;
+		this.setTitle("CeSort");
 		
+		FileInputStream fileR;
+		try {
+			fileR = new FileInputStream("Images/requirements.png");
+			logoCeSort = new ImageIcon(ImageIO.read(fileR));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		this.setIconImage(logoCeSort.getImage());
+
 		panel = new JPanel();
 		layout = new SpringLayout();
 		
