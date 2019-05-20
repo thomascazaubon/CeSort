@@ -29,6 +29,8 @@ public class WelcomeView extends JFrame {
 	
 	private JPanel welcomePanel;
 	private SpringLayout layout;
+	
+	private JLabel imageP;
 
 	private ImageIcon logoCeSort;
 
@@ -79,6 +81,20 @@ public class WelcomeView extends JFrame {
 		jcesort.setFont(new Font("Bitstream Charter", Font.BOLD , 60));
 		jcesort.setBounds(40, 90, 300, 80);
 		welcomePanel.add(jcesort);
+		
+		FileInputStream fileP;
+		try {
+			fileP = new FileInputStream("Images/logoCeSort.png");
+			ImageIcon logoP = new ImageIcon(ImageIO.read(fileP));
+			imageP = new JLabel(logoP);
+			layout.putConstraint(SpringLayout.NORTH, imageP, 30, SpringLayout.NORTH, welcomePanel);
+			layout.putConstraint(SpringLayout.EAST, imageP, -30, SpringLayout.EAST, welcomePanel);
+			imageP.setBounds(200,100,50,50);
+			imageP.setOpaque(false);
+	        welcomePanel.add(imageP);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
 		/*
 		//Logo CeSort
