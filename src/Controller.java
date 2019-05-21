@@ -291,6 +291,7 @@ public class Controller {
 			resource = Resource.OrgChart;
 			break;
 		}
+
 		//If the resource has already been modified
 		if (paths.get(resource) != null) {
 			path = paths.get(resource);

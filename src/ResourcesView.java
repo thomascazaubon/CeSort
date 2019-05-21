@@ -184,20 +184,24 @@ public class ResourcesView extends JFrame {
 						chooser.setSelectedFile(new File("schedule.xlsx"));
 						ff = new FileNameExtensionFilter("Excel", "xlsx");
 						break;
-					case "Organization chart":
+					case "Organizational chart":
 						chooser.setSelectedFile(new File("orgChart.pptx"));
 						ff = new FileNameExtensionFilter("PowerPoint", "pptx");
 						break;
-					case "Requirements list":
+					case "List":
 						chooser.setSelectedFile(new File("reqList.xlsx"));
 						ff = new FileNameExtensionFilter("Excel", "xlsx");
 						break;
-					case "Requirements model":
+					case "Model":
 						chooser.setSelectedFile(new File("reqModel.xml"));
 						ff = new FileNameExtensionFilter("XML", "xml");
 						break;
-					case "Process models":
-						chooser.setSelectedFile(new File("procModel.xml"));
+					case "Structural model":
+						chooser.setSelectedFile(new File("strucModel.xml"));
+						ff = new FileNameExtensionFilter("XML", "xml");
+						break;
+					case "Behavioural model":
+						chooser.setSelectedFile(new File("behavModel.xml"));
 						ff = new FileNameExtensionFilter("XML", "xml");
 						break;
 					}
