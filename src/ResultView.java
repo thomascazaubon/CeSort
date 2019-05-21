@@ -246,7 +246,7 @@ public class ResultView extends JFrame {
 		});
 		panel.add(btnPlanning);
 		
-		btnModels = new JButton("Models");
+		btnModels = new JButton("Processes");
 		layout.putConstraint(SpringLayout.NORTH, imageM, -90, SpringLayout.NORTH, btnModels);
 		layout.putConstraint(SpringLayout.WEST, imageM, 0, SpringLayout.WEST, btnModels);
 		layout.putConstraint(SpringLayout.SOUTH, imageM, -10, SpringLayout.NORTH, btnModels);
@@ -255,11 +255,11 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, btnModels, 74, SpringLayout.WEST, panel);
 		btnModels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.displayResource(Resource.ProcModel); 
+				controller.displayResource(Resource.StrucModel); 
 		}});
 		panel.add(btnModels);
 		
-		btnOrganizationnalChart = new JButton("Organizationnal chart");
+		btnOrganizationnalChart = new JButton("Organizational chart");
 		layout.putConstraint(SpringLayout.NORTH, imageO, -90, SpringLayout.NORTH, btnOrganizationnalChart);
 		layout.putConstraint(SpringLayout.WEST, imageO, 0, SpringLayout.WEST, btnOrganizationnalChart);
 		layout.putConstraint(SpringLayout.SOUTH, imageO, -10, SpringLayout.NORTH, btnOrganizationnalChart);
@@ -268,7 +268,7 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.EAST, btnOrganizationnalChart, -27, SpringLayout.WEST, previousQuestionsScroll);
 		btnOrganizationnalChart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.displayResource(Resource.Chart);
+				controller.displayResource(Resource.OrgChart);
 			}
 		});
 		panel.add(btnOrganizationnalChart);
@@ -282,7 +282,7 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, btnRequirements, 56, SpringLayout.WEST, panel);
 		btnRequirements.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.displayResource(Resource.ReqList);
+				controller.displayResource(Resource.List);
 				}
 		});
 		panel.add(btnRequirements);

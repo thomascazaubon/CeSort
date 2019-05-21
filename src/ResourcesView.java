@@ -44,11 +44,13 @@ public class ResourcesView extends JFrame {
 	
 	private Controller controller;
 	private JLabel imageRes;
-	private JButton btnModels;
+	private JButton btnProc;
 	private JButton btnSchedule;
 	private JButton btnOrgChart;
-	private JButton btnProcess;
-	private JButton btnRequirementsModels;
+	private JButton btnList;
+	private JButton btnModel;
+	private JButton btnStrucModel;
+	private JButton btnBehavModel;
 	
 	private ImageIcon logoCeSort;
 	
@@ -113,8 +115,29 @@ public class ResourcesView extends JFrame {
 		btnResults.setBackground(new Color(224, 255, 255));
 		panel.add(btnResults);
 				
+		String title = null;
+		switch(res) {
+		case "List":
+			title = "Requirements";
+			break;
+		case "Model":
+			title = "Requirements";
+			break;
+		case "Structural model":
+			title = "Processes";
+			break;
+		case "Behavioural model":
+			title = "Processes";
+			break;
+		case "Schedule":
+			title = "Schedule";
+			break;
+		case "Organizational chart":
+			title = "Organizational chart";
+			break;
+		}
+		JLabel lblResource = new JLabel(title);
 		
-		JLabel lblResource = new JLabel(res);
 		lblResource.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		layout.putConstraint(SpringLayout.NORTH, lblResource, 26, SpringLayout.NORTH, panel);
 		layout.putConstraint(SpringLayout.WEST, lblResource, 27, SpringLayout.WEST, panel);
@@ -204,28 +227,37 @@ public class ResourcesView extends JFrame {
 	    });
 	    layout.putConstraint(SpringLayout.NORTH, btnReq, 60, SpringLayout.SOUTH, lblResource);
 	    layout.putConstraint(SpringLayout.WEST, btnReq, 26, SpringLayout.WEST, panel);
+	    if (currentRes == 0 || currentRes == 1) {
+	    	btnReq.setForeground(new Color(139, 139, 139));
+	    }
 	    panel.add(btnReq);
 	    
-	    btnModels = new JButton("Models");
-	    layout.putConstraint(SpringLayout.NORTH, btnModels, 6, SpringLayout.SOUTH, btnReq);
-	    layout.putConstraint(SpringLayout.WEST, btnModels, 0, SpringLayout.WEST, lblResource);
-	    btnModels.addActionListener(new ActionListener() {
+	    btnProc = new JButton("Processes");
+	    layout.putConstraint(SpringLayout.NORTH, btnProc, 6, SpringLayout.SOUTH, btnReq);
+	    layout.putConstraint(SpringLayout.WEST, btnProc, 0, SpringLayout.WEST, lblResource);
+	    btnProc.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		currentRes = 1;
+	    		currentRes = 2;
 	    		setUpFrame();
 	    	}
 	    });
-	    panel.add(btnModels);
+	    if (currentRes == 2 || currentRes == 3) {
+	    	btnProc.setForeground(new Color(139, 139, 139));
+	    }
+	    panel.add(btnProc);
 	    
 	    btnSchedule = new JButton("Schedule");
-	    layout.putConstraint(SpringLayout.NORTH, btnSchedule, 6, SpringLayout.SOUTH, btnModels);
+	    layout.putConstraint(SpringLayout.NORTH, btnSchedule, 6, SpringLayout.SOUTH, btnProc);
 	    layout.putConstraint(SpringLayout.WEST, btnSchedule, 0, SpringLayout.WEST, lblResource);
 	    btnSchedule.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		currentRes = 3;
+	    		currentRes = 4;
 	    		setUpFrame();
 	    	}
 	    });
+	    if (currentRes == 4) {
+	    	btnSchedule.setForeground(new Color(139, 139, 139));
+	    }
 	    panel.add(btnSchedule);
 	    
 	    btnOrgChart = new JButton("Org. chart");
@@ -233,35 +265,74 @@ public class ResourcesView extends JFrame {
 	    layout.putConstraint(SpringLayout.WEST, btnOrgChart, 0, SpringLayout.WEST, lblResource);
 	    btnOrgChart.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		currentRes = 4;
+	    		currentRes = 5;
 	    		setUpFrame();
 	    	}
 	    });
+	    if (currentRes == 5) {
+	    	btnOrgChart.setForeground(new Color(139, 139, 139));
+	    }
 	    panel.add(btnOrgChart);
 	    
 	    
-	    if(currentRes == 1 || currentRes == 2) {		    
-		    btnRequirementsModels = new JButton("Process models");
-		    btnRequirementsModels.addActionListener(new ActionListener() {
+	    if(currentRes == 0 || currentRes == 1) {		    
+		    btnList = new JButton("List");
+		    btnList.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		currentRes = 0;
+		    		setUpFrame();
+		    	}
+		    });
+		    layout.putConstraint(SpringLayout.NORTH, btnList, 0, SpringLayout.NORTH, lblResource);
+		    layout.putConstraint(SpringLayout.EAST, btnList, 0, SpringLayout.EAST, imgScroll);
+		    if (currentRes == 0) {
+		    	btnList.setForeground(new Color(139, 139, 139));
+		    }
+		    panel.add(btnList);
+		    
+		    btnModel = new JButton("Model");
+			layout.putConstraint(SpringLayout.NORTH, btnModel, 0, SpringLayout.NORTH, lblResource);
+			layout.putConstraint(SpringLayout.EAST, btnModel, -30, SpringLayout.WEST, btnList);
+			btnModel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentRes = 1;
+				setUpFrame();
+			}
+			});
+			if (currentRes == 1) {
+				btnModel.setForeground(new Color(139, 139, 139));
+		    }
+			panel.add(btnModel);
+	    }
+	    
+	    if(currentRes == 2 || currentRes == 3) {		    
+		    btnStrucModel = new JButton("Structural model");
+		    btnStrucModel.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
 		    		currentRes = 2;
 		    		setUpFrame();
 		    	}
 		    });
-		    layout.putConstraint(SpringLayout.NORTH, btnRequirementsModels, 0, SpringLayout.NORTH, lblResource);
-		    layout.putConstraint(SpringLayout.EAST, btnRequirementsModels, 0, SpringLayout.EAST, imgScroll);
-		    panel.add(btnRequirementsModels);
+		    layout.putConstraint(SpringLayout.NORTH, btnStrucModel, 0, SpringLayout.NORTH, lblResource);
+		    layout.putConstraint(SpringLayout.EAST, btnStrucModel, 0, SpringLayout.EAST, imgScroll);
+		    if (currentRes == 2) {
+		    	btnStrucModel.setForeground(new Color(139, 139, 139));
+		    }
+		    panel.add(btnStrucModel);
 		    
-    			btnProcess = new JButton("Requirements models");
-    			layout.putConstraint(SpringLayout.NORTH, btnProcess, 0, SpringLayout.NORTH, lblResource);
-    			layout.putConstraint(SpringLayout.EAST, btnProcess, -30, SpringLayout.WEST, btnRequirementsModels);
-    			btnProcess.addActionListener(new ActionListener() {
-    			public void actionPerformed(ActionEvent e) {
-    				currentRes = 1;
-    				setUpFrame();
-    			}
-    			});
-    			panel.add(btnProcess);
+			btnBehavModel = new JButton("Behavioural model");
+			layout.putConstraint(SpringLayout.NORTH, btnBehavModel, 0, SpringLayout.NORTH, lblResource);
+			layout.putConstraint(SpringLayout.EAST, btnBehavModel, -30, SpringLayout.WEST, btnStrucModel);
+			btnBehavModel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentRes = 3;
+				setUpFrame();
+			}
+			});
+			if (currentRes == 3) {
+				btnBehavModel.setForeground(new Color(139, 139, 139));
+		    }
+			panel.add(btnBehavModel);
 	    }
 	    
 		

@@ -18,7 +18,7 @@ import gnu.prolog.vm.PrologException;
 
 enum Language{FR,EN};
 enum View{Welcome, Question, Result, Resources};
-enum Resource{Schedule, Chart, ReqList, ReqModel, ProcModel};
+enum Resource{List, Model, StrucModel, BehavModel, Schedule, OrgChart};
 
 public class Controller {
 	int NUMBER_OF_RESOURCES = 5;
@@ -220,28 +220,33 @@ public class Controller {
 		//ImageIcon img = null;
 		int num = 0;
 		switch (r) {
-		case Schedule:
-			num = 3;
+		case List:
+			num = 0;
 			//ret = "Schedule";
 			//img = Model.getSchedulePreview(scenario);
 			break;
-		case Chart:
-			num = 4;
-			//ret = "Organization chart";
+		case Model:
+			num = 1;
+			//ret = "Organizational chart";
 			//img = Model.getOrgChartPreview(scenario);
 			break;
-		case ReqList:
-			num = 0;
+		case StrucModel:
+			num = 2;
 			//ret = "Requirements list";
 			//img = Model.getReqListPreview(scenario);
 			break;
-		case ReqModel:
-			num = 1; 
+		case BehavModel:
+			num = 3; 
 			//ret = "Requirements model";
 			//img = Model.getReqModelPreview(scenario);
 			break;
-		case ProcModel:
-			num = 2;
+		case Schedule:
+			num = 4;
+			//ret = "Process models";
+			//img = Model.getProcModelPreview(scenario);
+			break;
+		case OrgChart:
+			num = 5;
 			//ret = "Process models";
 			//img = Model.getProcModelPreview(scenario);
 			break;
@@ -249,9 +254,10 @@ public class Controller {
 		
 		resourcesView = new ResourcesView(this);
 		ArrayList<String> titles = new ArrayList<String>();
-		titles.add("Requirements list");
-		titles.add("Requirements model");
-		titles.add("Process models");
+		titles.add("List");
+		titles.add("Model");
+		titles.add("Structural model");
+		titles.add("Behavioural model");
 		titles.add("Schedule");
 		titles.add("Organizational chart");
 		ArrayList<ImageIcon> previews = Model.getPreviews(scenario);
@@ -266,20 +272,23 @@ public class Controller {
 		Resource resource = null;
 		File file = null;
 		switch (res) {
+		case "List":
+			resource = Resource.List;
+			break;
+		case "Model":
+			resource = Resource.Model;
+			break;
+		case "Structural model":
+			resource = Resource.StrucModel;
+			break;
+		case "Behavioural model":
+			resource = Resource.BehavModel;
+			break;
 		case "Schedule":
 			resource = Resource.Schedule;
 			break;
-		case "Organization chart":
-			resource = Resource.Chart;
-			break;
-		case "Requirements list":
-			resource = Resource.ReqList;
-			break;
-		case "Requirements model":
-			resource = Resource.ReqModel;
-			break;
-		case "Process models":
-			resource = Resource.ProcModel;
+		case "Organizational chart":
+			resource = Resource.OrgChart;
 			break;
 		}
 		//If the resource has already been modified
@@ -424,20 +433,23 @@ public class Controller {
 		Resource resource = null;
 		boolean set = false;
 		switch(res) {
+		case "List":
+			resource = Resource.List;
+			break;
+		case "Model":
+			resource = Resource.Model;
+			break;
+		case "Structural model":
+			resource = Resource.StrucModel;
+			break;
+		case "Behavioural model":
+			resource = Resource.BehavModel;
+			break;
 		case "Schedule":
 			resource = Resource.Schedule;
 			break;
-		case "Organization chart":
-			resource = Resource.Chart;
-			break;
-		case "Requirements list":
-			resource = Resource.ReqList;
-			break;
-		case "Requirements model":
-			resource = Resource.ReqModel;
-			break;
-		case "Process models":
-			resource = Resource.ProcModel;
+		case "Organizational chart":
+			resource = Resource.OrgChart;
 			break;
 		}
 		if (paths.get(resource) != null) {

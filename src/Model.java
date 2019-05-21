@@ -19,7 +19,6 @@ public class Model {
 	 */
 	public static ImageIcon getReqListPreview(int scenario) {
 		ImageIcon reqList = null;
-		//System.out.println(Model.class.getResource("/..").getFile());
 		reqList = new ImageIcon("Resources/" + scenario + "/reqList.png");
 		return reqList;
 	}
@@ -34,10 +33,18 @@ public class Model {
 	}
 	
 	/**
-	 * Return an ImageIcon representing the corresponding process model
+	 * Return an ImageIcon representing the corresponding structural model
 	 */
-	public static ImageIcon getProcModelPreview(int scenario) {
-		ImageIcon procModel = new ImageIcon("Resources/" + scenario + "/procModel.png");
+	public static ImageIcon getStrucModelPreview(int scenario) {
+		ImageIcon procModel = new ImageIcon("Resources/" + scenario + "/strucModel.png");
+		return procModel;
+	}
+	
+	/**
+	 * Return an ImageIcon representing the corresponding behavioural model
+	 */
+	public static ImageIcon getBehavModelPreview(int scenario) {
+		ImageIcon procModel = new ImageIcon("Resources/" + scenario + "/behavModel.png");
 		return procModel;
 	}
 	
@@ -66,79 +73,37 @@ public class Model {
 		ArrayList<ImageIcon> previews = new ArrayList<ImageIcon>(5);
 		previews.add(getReqListPreview(scenario));
 		previews.add(getReqModelPreview(scenario));
-		previews.add(getProcModelPreview(scenario));
+		previews.add(getStrucModelPreview(scenario));
+		previews.add(getBehavModelPreview(scenario));
 		previews.add(getSchedulePreview(scenario));
 		previews.add(getOrgChartPreview(scenario));
 		return previews;
 	}
 	
 	/* * * * * M E T H O D S - F I L E * * * * */
-		
-	/**
-	 * Return a File representing the corresponding requirements list
-	 */
-	public static File getReqList(int scenario) {
-		File reqList = null;
-		reqList = new File("Resources/" + scenario + "/reqList.xlsx");
-		return reqList;
-	}
-	
-	/**
-	 * Return a File representing the corresponding requirements model
-	 */
-	public static File getReqModel(int scenario) {
-		File reqModel = null;
-		reqModel = new File("Resources/" + scenario + "/reqModel.xml");
-		return reqModel;
-	}
-	
-	/**
-	 * Return a File representing the corresponding process model
-	 */
-	public static File getProcModel(int scenario) {
-		File procModel = null;
-		procModel = new File("Resources/" + scenario + "/procModel.xml");
-		return procModel;
-	}
-	
-	/**
-	 * Return a File representing the corresponding schedule
-	 */
-	public static File getSchedule(int scenario) {
-		File schedule = null;
-		schedule = new File("Resources/" + scenario + "/schedule.xlsx");
-		return schedule;
-	}
-	
-	/**
-	 * Return a File representing the corresponding schedule
-	 */
-	public static File getOrgChart(int scenario) {
-		File orgChart = null;
-		orgChart = new File("Resources/" + scenario + "/orgChart.pptx");
-		return orgChart;
-	}
 	
 	public static File getResource(Resource res, int scenario) {
 		File file = null;
 		switch(res) {
+		case List:
+			file = new File("Resources/" + scenario + "/reqList.xlsx");
+			break;
+		case Model:
+			file = new File("Resources/" + scenario + "/reqModel.xml");
+			break;
+		case StrucModel:
+			file = new File("Resources/" + scenario + "/strucModel.xml");
+			break;
+		case BehavModel:
+			file = new File("Resources/" + scenario + "/behavModel.xml");
+			break;
 		case Schedule:
 			file = new File("Resources/" + scenario + "/schedule.xlsx");
 			break;
-		case Chart:
+		case OrgChart:
 			file = new File("Resources/" + scenario + "/orgChart.pptx");
-			break;
-		case ReqList:
-			file = new File("Resources/" + scenario + "/reqList.xlsx");
-			break;
-		case ReqModel:
-			file = new File("Resources/" + scenario + "/reqModel.xml");
-			break;
-		case ProcModel:
-			file = new File("Resources/" + scenario + "/procModel.xml");
 			break;
 		}
 		return file;
 	}
-	
 }
