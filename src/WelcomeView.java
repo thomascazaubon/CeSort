@@ -119,9 +119,8 @@ public class WelcomeView extends JFrame {
 		welcomePanel.add(jwelcome);
 		
 		JLabel welcomeText = new JLabel("<html>"
-				+ "CeSort is an expert system made to sort out aeronautical standars. <br>"
-				+ "It will allow you, after a few questions to download the things you need to start working on your aircraft project without any trouble.<br>"
-				+ "<br>"
+				+ "CeSort is an expert system to support your aircraft certification activities. <br>"
+				+ "After a questionnaire, you will get a set of materials that you will be able to download on your computer <br>"
 				+ "From this page, you can either initiate a new project by clicking on the \"Start\" button, or load a previous project that you would like to modify."
 				+ "</html>");
 		layout.putConstraint(SpringLayout.NORTH, welcomeText, 216, SpringLayout.NORTH, welcomePanel);

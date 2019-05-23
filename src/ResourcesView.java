@@ -4,6 +4,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -84,6 +85,7 @@ public class ResourcesView extends JFrame {
 		panel = new JPanel();
 		layout = new SpringLayout();
 		btnOpenToModify = new JButton();
+        this.setMinimumSize(new Dimension(600, 600));
 		
 		this.setSize(600,600);
 		//setUpFrame();
@@ -241,7 +243,7 @@ public class ResourcesView extends JFrame {
 	    
 	    btnProc = new JButton("Processes");
 		btnProc.setOpaque(true);
-	    layout.putConstraint(SpringLayout.NORTH, btnProc, 6, SpringLayout.SOUTH, btnReq);
+	    layout.putConstraint(SpringLayout.NORTH, btnProc, 24, SpringLayout.SOUTH, btnReq);
 	    layout.putConstraint(SpringLayout.WEST, btnProc, 0, SpringLayout.WEST, lblResource);
 	    btnProc.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -256,7 +258,7 @@ public class ResourcesView extends JFrame {
 	    
 	    btnSchedule = new JButton("Schedule");
 		btnSchedule.setOpaque(true);
-	    layout.putConstraint(SpringLayout.NORTH, btnSchedule, 6, SpringLayout.SOUTH, btnProc);
+	    layout.putConstraint(SpringLayout.NORTH, btnSchedule, 24, SpringLayout.SOUTH, btnProc);
 	    layout.putConstraint(SpringLayout.WEST, btnSchedule, 0, SpringLayout.WEST, lblResource);
 	    btnSchedule.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -271,7 +273,7 @@ public class ResourcesView extends JFrame {
 	    
 	    btnOrgChart = new JButton("Org. chart");
 		btnOrgChart.setOpaque(true);
-	    layout.putConstraint(SpringLayout.NORTH, btnOrgChart, 6, SpringLayout.SOUTH, btnSchedule);
+	    layout.putConstraint(SpringLayout.NORTH, btnOrgChart, 24, SpringLayout.SOUTH, btnSchedule);
 	    layout.putConstraint(SpringLayout.WEST, btnOrgChart, 0, SpringLayout.WEST, lblResource);
 	    btnOrgChart.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -330,7 +332,7 @@ public class ResourcesView extends JFrame {
 		    	}
 		    });
 		    layout.putConstraint(SpringLayout.NORTH, btnStrucModel, 0, SpringLayout.NORTH, lblResource);
-		    layout.putConstraint(SpringLayout.EAST, btnStrucModel, 0, SpringLayout.EAST, imgScroll);
+		    layout.putConstraint(SpringLayout.EAST, btnStrucModel, -15, SpringLayout.EAST, imgScroll);
 		    if (currentRes == 2) {
 		    	btnStrucModel.setBackground(new Color(255, 204, 102));
 		    }
