@@ -36,7 +36,7 @@ public class Question {
 		answers1.put("oem", "An OEM");
 		answers1.put("motorist", "A Motorist");
 		answers1.put("tier", "A Tier-1, 2 or 3");
-		questions.put("kindOfOrganisation", new Question("What kind of organisation is concerned by the Certification Process ?", answers1));
+		questions.put("kindOfOrganisation", new Question("What kind of organisation is concerned by the Certification Process?", answers1));
 		
 		// Question 2
 		HashMap<String, String> answers2 = new HashMap<String, String>();
@@ -44,33 +44,33 @@ public class Question {
 		answers2.put("motorOrPropulsionSystem", "A Motor or Propulsion system");
 		answers2.put("appliance", "An Appliance");
 		answers2.put("part", "A Part");
-		questions.put("kindOfProduct", new Question("What kind of product is concerned by the Certification Process ?", answers2));
+		questions.put("kindOfProduct", new Question("What kind of product is concerned by the Certification Process?", answers2));
 		
 		// Question 3
 		HashMap<String, String> answers3 = new HashMap<String, String>();
 		answers3.put("yes", "Yes");
 		answers3.put("no", "No");
-		questions.put("headOfficeInEU", new Question("Is the head office of the organisation in the EU or in one of these countries : Iceland, Liechtenstein, Norway or Swiss ?", answers3));
+		questions.put("headOfficeInEU", new Question("Is the head office of the organisation in the EU or in one of these countries : Iceland, Liechtenstein, Norway or Swiss?", answers3));
 		
 		// Question 4
 		HashMap<String, String> answers4 = new HashMap<String, String>();
 		answers4.put("moreThan2T", "More than 2T");
 		answers4.put("lessThan2T", "Less than 2T");
-		questions.put("weight", new Question("What is the weight of the aircraft concerned by the Certification Process ?", answers4));
+		questions.put("weight", new Question("What is the weight of the aircraft concerned by the Certification Process?", answers4));
 		
 		// Question 5
 		HashMap<String, String> answers5 = new HashMap<String, String>();
 		answers5.clear();
 		answers5.put("yes", "Yes");
 		answers5.put("no", "No");
-		questions.put("standardPart", new Question("Is it a standard part ?", answers5));
+		questions.put("standardPart", new Question("Is it a standard part?", answers5));
 		
 		// Question 6
 		HashMap<String, String> answers6 = new HashMap<String, String>();
 		answers6.put("design", "Design");
 		answers6.put("production", "Production");
 		answers6.put("both", "Both");
-		questions.put("mainResponsabilities", new Question("What will be the main responsabilities of the organisation ?", answers6));
+		questions.put("mainResponsabilities", new Question("What will be the main responsabilities of the organisation?", answers6));
 		
 		// There is no question 7
 		
@@ -78,19 +78,19 @@ public class Question {
 		HashMap<String, String> answers8 = new HashMap<String, String>();
 		answers8.put("yes", "Yes");
 		answers8.put("no", "No");
-		questions.put("typeCertificate", new Question("Does the organisation hold already a type certificate ?", answers8));
+		questions.put("typeCertificate", new Question("Does the organisation hold already a type certificate?", answers8));
 		
 		// Question 9
 		HashMap<String, String> answers9 = new HashMap<String, String>();
 		answers9.put("newProgram", "New program");
 		answers9.put("modificationRequest", "Modification request");
-		questions.put("modificationRequestOrNewProgram", new Question("Does the organisation want to request a modification for an already held TC or does the certification process concern a nex program ?", answers9));
+		questions.put("modificationRequestOrNewProgram", new Question("Does the organisation want to request a modification for an already held TC or does the certification process concern a nex program?", answers9));
 		
 		// Question 10
 		HashMap<String, String> answers10 = new HashMap<String, String>();
 		answers10.put("yes", "Yes");
 		answers10.put("no", "No");
-		questions.put("requestModification", new Question("Does the organisation want to request a modification for the current certification process ?", answers10));
+		questions.put("requestModification", new Question("Does the organisation want to request a modification for the current certification process?", answers10));
 		
 		// Question 11
 		HashMap<String, String> answers11 = new HashMap<String, String>();
@@ -98,19 +98,19 @@ public class Question {
 		answers11.put("designApproval", "Design approval");
 		answers11.put("productionApproval", "Production approval");
 		answers11.put("tcAndCoA", "TC and CoA");
-		questions.put("nextTarget", new Question("What is the next target for the Organisation ?", answers11));
+		questions.put("nextTarget", new Question("What is the next target for the Organisation?", answers11));
 		
 		// Question 12
 		HashMap<String, String> answers12 = new HashMap<String, String>();
 		answers12.put("yes", "Yes");
 		answers12.put("no", "No");
-		questions.put("privilegeFromEASA", new Question("Does the organisation have any privilege from EASA ?", answers12));
+		questions.put("privilegeFromEASA", new Question("Does the organisation have any privilege from EASA?", answers12));
 		
 		// Question 13
 		HashMap<String, String> answers13 = new HashMap<String, String>();
 		answers13.put("yes", "Yes");
 		answers13.put("no", "No");
-		questions.put("operationalConditionsMightBeRestricted", new Question("Do you think the operational conditions might be restricted ?", answers13));	
+		questions.put("operationalConditionsMightBeRestricted", new Question("Do you think the operational conditions might be restricted?", answers13));	
 		
 	}
 	

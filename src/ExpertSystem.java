@@ -43,7 +43,7 @@ public class ExpertSystem {
 			"typeCertificate", 
 			"requestModification", 
 			"nextTarget", 
-			"modificationRequestOrNexProgram",
+			"modificationRequestOrNewProgram",
 			"privilegeFromEASA",
 			"operationalConditionsMightBeRestricted"},
 			{"_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"}};

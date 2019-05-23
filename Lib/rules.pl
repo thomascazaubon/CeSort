@@ -113,7 +113,7 @@ scenario(0) :-
     weight(lessThan2T).
 scenario(0) :-
     kindOfOrganisation(tier),
-    kindOfProduct(X), X \= appliance.
+    kindOfProduct(X), X == aircraft.
 scenario(0) :-
     kindOfOrganisation(motorist),
     kindOfProduct(appliance),
@@ -125,7 +125,7 @@ scenario(0) :-
     weight(lessThan2T).
 scenario(0) :-
     kindOfOrganisation(tier),
-    kindOfProduct(X), X \= appliance.
+    kindOfProduct(X), X == motorOrPropulsionSystem.
 scenario(0) :-
     kindOfOrganisation(motorist),
     kindOfProduct(tier),
@@ -219,7 +219,7 @@ scenario(0) :-
     headOfficeInEU(yes),
     weight(moreThan2T),
     typeCertificate(yes),
-    requestModificationOrNewProgram(newProgram).
+    modificationRequestOrNewProgram(newProgram).
 scenario(0) :-
     kindOfOrganisation(oem),
     kindOfProduct(aircraft),
