@@ -136,12 +136,12 @@ public class ResultView extends JFrame {
 		});
 		panel.add(btnHome);
 		
-		btnDownload = new JButton("Download");
+		btnDownload = new JButton("<html><center>Download<br>resources</center></html>");
 		btnDownload.setForeground(new Color(34, 139, 34));
 		layout.putConstraint(SpringLayout.NORTH, btnHome, 0, SpringLayout.NORTH, btnDownload);
 		layout.putConstraint(SpringLayout.SOUTH, btnHome, 0, SpringLayout.SOUTH, btnDownload);
-		layout.putConstraint(SpringLayout.NORTH, btnDownload, -69, SpringLayout.SOUTH, panel);
-		layout.putConstraint(SpringLayout.SOUTH, btnDownload, -29, SpringLayout.SOUTH, panel);
+		layout.putConstraint(SpringLayout.NORTH, btnDownload, -75, SpringLayout.SOUTH, panel);
+		layout.putConstraint(SpringLayout.SOUTH, btnDownload, -24, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.EAST, btnDownload, -45, SpringLayout.WEST, previousQuestionsScroll);
 		btnDownload.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnDownload.addActionListener(new ActionListener() {
@@ -151,7 +151,7 @@ public class ResultView extends JFrame {
 	    			FileNameExtensionFilter ff = new FileNameExtensionFilter("Zip", "zip");
 	    			chooser.addChoosableFileFilter(ff);
 	    			chooser.setFileFilter(ff);
-				chooser.setDialogTitle("Download project");
+				chooser.setDialogTitle("Download resources");
 				chooser.showSaveDialog(panel);
 				if(chooser.getSelectedFile() != null) {
 					controller.downloadResources(chooser.getSelectedFile().getAbsolutePath());
@@ -160,12 +160,12 @@ public class ResultView extends JFrame {
 		});
 		panel.add(btnDownload);
 		
-		btnSave = new JButton("Save");
+		btnSave = new JButton("<html><center>Save<br>project</center></html>");
 		btnSave.setForeground(new Color(0, 128, 0));
-		layout.putConstraint(SpringLayout.NORTH, btnSave, 0, SpringLayout.NORTH, btnHome);
-		layout.putConstraint(SpringLayout.WEST, btnSave, 48, SpringLayout.EAST, btnHome);
-		layout.putConstraint(SpringLayout.SOUTH, btnSave, 40, SpringLayout.NORTH, btnHome);
-		layout.putConstraint(SpringLayout.EAST, btnSave, -39, SpringLayout.WEST, btnDownload);
+		layout.putConstraint(SpringLayout.NORTH, btnSave, -75, SpringLayout.SOUTH, panel);
+		layout.putConstraint(SpringLayout.WEST, btnSave, 38, SpringLayout.EAST, btnHome);
+		layout.putConstraint(SpringLayout.SOUTH, btnSave, -24, SpringLayout.SOUTH, panel);
+		layout.putConstraint(SpringLayout.EAST, btnSave, -38, SpringLayout.WEST, btnDownload);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
