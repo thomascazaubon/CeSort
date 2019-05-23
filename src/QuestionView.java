@@ -188,8 +188,8 @@ public class QuestionView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, btnHome, -166, SpringLayout.EAST, panel);
 		layout.putConstraint(SpringLayout.SOUTH, btnHome, -21, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.EAST, btnHome, -61, SpringLayout.EAST, panel);
-		btnHome.setForeground(new Color(255, 80, 80));
 		btnHome.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		btnHome.setForeground(new Color(255, 80, 80));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Advance to the next question

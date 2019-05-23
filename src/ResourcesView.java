@@ -172,7 +172,7 @@ public class ResourcesView extends JFrame {
 	    imgPanel.add(imageRes);
 	        
 	    //Download
-	    btnOpenToModify.setText("Open to modify");
+	    btnOpenToModify.setText("Save and modify");
 	    layout.putConstraint(SpringLayout.WEST, btnOpenToModify, 319, SpringLayout.WEST, panel);
 	    layout.putConstraint(SpringLayout.EAST, btnResults, -110, SpringLayout.WEST, btnOpenToModify);
 	    layout.putConstraint(SpringLayout.NORTH, btnOpenToModify, 0, SpringLayout.NORTH, btnResults);

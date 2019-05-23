@@ -147,7 +147,7 @@ public class ResultView extends JFrame {
 		btnDownload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
-	    			chooser.setSelectedFile(new File("CeSort.zip"));
+	    			chooser.setSelectedFile(new File("Resources.zip"));
 	    			FileNameExtensionFilter ff = new FileNameExtensionFilter("Zip", "zip");
 	    			chooser.addChoosableFileFilter(ff);
 	    			chooser.setFileFilter(ff);
