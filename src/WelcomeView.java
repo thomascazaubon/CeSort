@@ -66,6 +66,7 @@ public class WelcomeView extends JFrame {
 		layout = new SpringLayout();
 		
 		this.setSize(600,600);
+		this.setResizable(false);
 		//setUpFrame();
 
 	}

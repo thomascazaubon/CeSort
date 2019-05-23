@@ -92,7 +92,7 @@ public class QuestionView extends JFrame {
 		listBtnAnswer = new ArrayList<JRadioButton>();
 		
 		previousQuestionsPanel = new JPanel();
-		previousQuestionsPanel.setBackground(new Color(102, 153, 204));
+		previousQuestionsPanel.setBackground(new Color(224, 255, 255));
 		previousQuestionsScroll = new JScrollPane(previousQuestionsPanel);
 		layout.putConstraint(SpringLayout.WEST, previousQuestionsScroll, 479, SpringLayout.WEST, panel);
 		layout.putConstraint(SpringLayout.SOUTH, previousQuestionsScroll, -79, SpringLayout.SOUTH, panel);
@@ -102,7 +102,7 @@ public class QuestionView extends JFrame {
 		previousQuestionsLayout = new BoxLayout(previousQuestionsPanel, BoxLayout.Y_AXIS);
 		
 		answersPanel = new JPanel();
-		answersPanel.setBackground(new Color(192, 192, 192));
+		answersPanel.setBackground(new Color(211, 211, 211));
 		answersScroll = new JScrollPane(answersPanel);
 		layout.putConstraint(SpringLayout.WEST, answersScroll, 40, SpringLayout.WEST, panel);
 		layout.putConstraint(SpringLayout.SOUTH, answersScroll, -148, SpringLayout.SOUTH, panel);
@@ -111,6 +111,7 @@ public class QuestionView extends JFrame {
 		answersScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		answersLayout = new BoxLayout(answersPanel, BoxLayout.Y_AXIS);
 		
+		this.setResizable(false);
 		this.setSize(1000,600);
 		//setUpFrame();
 
@@ -128,6 +129,7 @@ public class QuestionView extends JFrame {
 		panel.add(answersScroll);
 		
 		questionLabel = new JLabel("Question number "+ currentQuestion.getNum());
+		questionLabel.setOpaque(true);
 		layout.putConstraint(SpringLayout.NORTH, questionLabel, 34, SpringLayout.NORTH, panel);
 		layout.putConstraint(SpringLayout.WEST, questionLabel, 40, SpringLayout.WEST, panel);
 		questionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
@@ -198,7 +200,10 @@ public class QuestionView extends JFrame {
 		if(currentQuestion.getAnswers() != null) {
 			for(String answer : currentQuestion.getAnswers().values()) {
 				JRadioButton newAnswer = new JRadioButton(answer);
+				newAnswer.setOpaque(true);
 				listBtnAnswer.add(newAnswer);
+				newAnswer.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+				newAnswer.setBackground(answersPanel.getBackground());
 				newAnswer.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// Check out of the other answers

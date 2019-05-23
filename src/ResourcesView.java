@@ -43,6 +43,7 @@ public class ResourcesView extends JFrame {
 	private JScrollPane imgScroll;
 	
 	private Controller controller;
+	private JButton btnOpenToModify;
 	private JLabel imageRes;
 	private JButton btnProc;
 	private JButton btnSchedule;
@@ -82,6 +83,7 @@ public class ResourcesView extends JFrame {
 		
 		panel = new JPanel();
 		layout = new SpringLayout();
+		btnOpenToModify = new JButton();
 		
 		this.setSize(600,600);
 		//setUpFrame();
@@ -168,16 +170,15 @@ public class ResourcesView extends JFrame {
 	    imgPanel.add(imageRes);
 	        
 	    //Download
-	    JButton btnNewButton = new JButton("Open to modify");
-	    layout.putConstraint(SpringLayout.WEST, btnNewButton, 319, SpringLayout.WEST, panel);
-	    layout.putConstraint(SpringLayout.EAST, btnResults, -110, SpringLayout.WEST, btnNewButton);
-	    layout.putConstraint(SpringLayout.NORTH, btnNewButton, 0, SpringLayout.NORTH, btnResults);
-	    layout.putConstraint(SpringLayout.SOUTH, btnNewButton, -29, SpringLayout.SOUTH, panel);
-	    btnNewButton.addActionListener(new ActionListener() {
+	    btnOpenToModify.setText("Open to modify");
+	    layout.putConstraint(SpringLayout.WEST, btnOpenToModify, 319, SpringLayout.WEST, panel);
+	    layout.putConstraint(SpringLayout.EAST, btnResults, -110, SpringLayout.WEST, btnOpenToModify);
+	    layout.putConstraint(SpringLayout.NORTH, btnOpenToModify, 0, SpringLayout.NORTH, btnResults);
+	    layout.putConstraint(SpringLayout.SOUTH, btnOpenToModify, -29, SpringLayout.SOUTH, panel);
+	    btnOpenToModify.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		JFileChooser chooser = new JFileChooser();
-	    		FileNameExtensionFilter ff = null;
-
+			FileNameExtensionFilter ff = null;
 	    		if(!controller.isPathSet(res)) {
 		    		switch (res) {
 					case "Schedule":
@@ -208,7 +209,7 @@ public class ResourcesView extends JFrame {
 		    		
 					chooser.addChoosableFileFilter(ff);
 					chooser.setFileFilter(ff);
-					chooser.setDialogTitle("Open to mdify");
+					chooser.setDialogTitle(btnOpenToModify.getText());
 					chooser.showSaveDialog(panel);
 					
 					if(chooser.getSelectedFile() != null) {
@@ -218,25 +219,28 @@ public class ResourcesView extends JFrame {
 	    			controller.modifyResource(res, null);
 	    		}
 				}});
-	    panel.add(btnNewButton);
+	    panel.add(btnOpenToModify);
 	    
 	    // Tabs
 	    
 	    JButton btnReq = new JButton("Requirements");
+    		btnReq.setOpaque(true);
 	    btnReq.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		currentRes = 0;
 	    		setUpFrame();
+		    	btnReq.setBackground(new Color(153, 204, 255));
 	    	}
 	    });
 	    layout.putConstraint(SpringLayout.NORTH, btnReq, 60, SpringLayout.SOUTH, lblResource);
 	    layout.putConstraint(SpringLayout.WEST, btnReq, 26, SpringLayout.WEST, panel);
 	    if (currentRes == 0 || currentRes == 1) {
-	    	btnReq.setForeground(new Color(139, 139, 139));
+	    	btnReq.setBackground(new Color(153, 204, 255));
 	    }
 	    panel.add(btnReq);
 	    
 	    btnProc = new JButton("Processes");
+		btnProc.setOpaque(true);
 	    layout.putConstraint(SpringLayout.NORTH, btnProc, 6, SpringLayout.SOUTH, btnReq);
 	    layout.putConstraint(SpringLayout.WEST, btnProc, 0, SpringLayout.WEST, lblResource);
 	    btnProc.addActionListener(new ActionListener() {
@@ -246,11 +250,12 @@ public class ResourcesView extends JFrame {
 	    	}
 	    });
 	    if (currentRes == 2 || currentRes == 3) {
-	    	btnProc.setForeground(new Color(139, 139, 139));
+	    	btnProc.setBackground(new Color(153, 204, 255));
 	    }
 	    panel.add(btnProc);
 	    
 	    btnSchedule = new JButton("Schedule");
+		btnSchedule.setOpaque(true);
 	    layout.putConstraint(SpringLayout.NORTH, btnSchedule, 6, SpringLayout.SOUTH, btnProc);
 	    layout.putConstraint(SpringLayout.WEST, btnSchedule, 0, SpringLayout.WEST, lblResource);
 	    btnSchedule.addActionListener(new ActionListener() {
@@ -260,11 +265,12 @@ public class ResourcesView extends JFrame {
 	    	}
 	    });
 	    if (currentRes == 4) {
-	    	btnSchedule.setForeground(new Color(139, 139, 139));
+	    	btnSchedule.setBackground(new Color(153, 204, 255));
 	    }
 	    panel.add(btnSchedule);
 	    
 	    btnOrgChart = new JButton("Org. chart");
+		btnOrgChart.setOpaque(true);
 	    layout.putConstraint(SpringLayout.NORTH, btnOrgChart, 6, SpringLayout.SOUTH, btnSchedule);
 	    layout.putConstraint(SpringLayout.WEST, btnOrgChart, 0, SpringLayout.WEST, lblResource);
 	    btnOrgChart.addActionListener(new ActionListener() {
@@ -274,13 +280,15 @@ public class ResourcesView extends JFrame {
 	    	}
 	    });
 	    if (currentRes == 5) {
-	    	btnOrgChart.setForeground(new Color(139, 139, 139));
+	    	btnOrgChart.setOpaque(true);
+	    	btnOrgChart.setBackground(new Color(153, 204, 255));
 	    }
 	    panel.add(btnOrgChart);
 	    
 	    
 	    if(currentRes == 0 || currentRes == 1) {		    
 		    btnList = new JButton("List");
+    			btnList.setOpaque(true);
 		    btnList.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
 		    		currentRes = 0;
@@ -290,55 +298,61 @@ public class ResourcesView extends JFrame {
 		    layout.putConstraint(SpringLayout.NORTH, btnList, 0, SpringLayout.NORTH, lblResource);
 		    layout.putConstraint(SpringLayout.EAST, btnList, 0, SpringLayout.EAST, imgScroll);
 		    if (currentRes == 0) {
-		    	btnList.setForeground(new Color(139, 139, 139));
+		    	btnList.setBackground(new Color(153, 255, 204));
 		    }
 		    panel.add(btnList);
 		    
-		    btnModel = new JButton("Model");
+		    btnModel = new JButton("Model");    		
+		    btnModel.setOpaque(true);
 			layout.putConstraint(SpringLayout.NORTH, btnModel, 0, SpringLayout.NORTH, lblResource);
 			layout.putConstraint(SpringLayout.EAST, btnModel, -30, SpringLayout.WEST, btnList);
 			btnModel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentRes = 1;
 				setUpFrame();
+			    btnOpenToModify.setText("Save");
 			}
 			});
 			if (currentRes == 1) {
-				btnModel.setForeground(new Color(139, 139, 139));
+				btnModel.setBackground(new Color(153, 255, 204));
 		    }
 			panel.add(btnModel);
 	    }
 	    
 	    if(currentRes == 2 || currentRes == 3) {		    
 		    btnStrucModel = new JButton("Structural model");
+    			btnStrucModel.setOpaque(true);
 		    btnStrucModel.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
 		    		currentRes = 2;
 		    		setUpFrame();
+				btnOpenToModify.setText("Save");
 		    	}
 		    });
 		    layout.putConstraint(SpringLayout.NORTH, btnStrucModel, 0, SpringLayout.NORTH, lblResource);
 		    layout.putConstraint(SpringLayout.EAST, btnStrucModel, 0, SpringLayout.EAST, imgScroll);
 		    if (currentRes == 2) {
-		    	btnStrucModel.setForeground(new Color(139, 139, 139));
+		    	btnStrucModel.setBackground(new Color(153, 255, 204));
 		    }
 		    panel.add(btnStrucModel);
 		    
 			btnBehavModel = new JButton("Behavioural model");
+			btnBehavModel.setOpaque(true);
 			layout.putConstraint(SpringLayout.NORTH, btnBehavModel, 0, SpringLayout.NORTH, lblResource);
 			layout.putConstraint(SpringLayout.EAST, btnBehavModel, -30, SpringLayout.WEST, btnStrucModel);
+			
 			btnBehavModel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentRes = 3;
 				setUpFrame();
+			    btnOpenToModify.setText("Save");
 			}
 			});
 			if (currentRes == 3) {
-				btnBehavModel.setForeground(new Color(139, 139, 139));
+				btnBehavModel.setBackground(new Color(153, 255, 204));
 		    }
 			panel.add(btnBehavModel);
 	    }
-	    
 		
 		panel.repaint();
 		panel.revalidate();
@@ -349,7 +363,6 @@ public class ResourcesView extends JFrame {
 		error.setText(txtError);
 	}
 	
-	// ReqList, ReqModel, ProcModel, Schedule, OrgChart
 	public void startResourcesView(int num, ArrayList<String> r, ArrayList<ImageIcon> img) {
 		this.currentRes = num;
 		this.listImageIcon = img;
