@@ -128,6 +128,7 @@ public class ResultView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, btnHome, 33, SpringLayout.WEST, panel);
 		layout.putConstraint(SpringLayout.EAST, btnHome, 136, SpringLayout.WEST, panel);
 		btnHome.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnHome.setForeground(new Color(255, 80, 80));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.displayHome();
@@ -298,7 +299,7 @@ public class ResultView extends JFrame {
 				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
 				newAnswer.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-				JLabel br = new JLabel(" -----");
+				JLabel br = new JLabel(" ");
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
 				previousQuestionsPanel.add(br);

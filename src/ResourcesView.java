@@ -298,7 +298,7 @@ public class ResourcesView extends JFrame {
 		    layout.putConstraint(SpringLayout.NORTH, btnList, 0, SpringLayout.NORTH, lblResource);
 		    layout.putConstraint(SpringLayout.EAST, btnList, 0, SpringLayout.EAST, imgScroll);
 		    if (currentRes == 0) {
-		    	btnList.setBackground(new Color(153, 255, 204));
+		    	btnList.setBackground(new Color(255, 204, 102));
 		    }
 		    panel.add(btnList);
 		    
@@ -314,7 +314,7 @@ public class ResourcesView extends JFrame {
 			}
 			});
 			if (currentRes == 1) {
-				btnModel.setBackground(new Color(153, 255, 204));
+				btnModel.setBackground(new Color(255, 204, 102));
 		    }
 			panel.add(btnModel);
 	    }
@@ -332,7 +332,7 @@ public class ResourcesView extends JFrame {
 		    layout.putConstraint(SpringLayout.NORTH, btnStrucModel, 0, SpringLayout.NORTH, lblResource);
 		    layout.putConstraint(SpringLayout.EAST, btnStrucModel, 0, SpringLayout.EAST, imgScroll);
 		    if (currentRes == 2) {
-		    	btnStrucModel.setBackground(new Color(153, 255, 204));
+		    	btnStrucModel.setBackground(new Color(255, 204, 102));
 		    }
 		    panel.add(btnStrucModel);
 		    
@@ -349,7 +349,7 @@ public class ResourcesView extends JFrame {
 			}
 			});
 			if (currentRes == 3) {
-				btnBehavModel.setBackground(new Color(153, 255, 204));
+				btnBehavModel.setBackground(new Color(255, 204, 102));
 		    }
 			panel.add(btnBehavModel);
 	    }

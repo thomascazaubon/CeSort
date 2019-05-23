@@ -188,6 +188,8 @@ public class QuestionView extends JFrame {
 		layout.putConstraint(SpringLayout.WEST, btnHome, -166, SpringLayout.EAST, panel);
 		layout.putConstraint(SpringLayout.SOUTH, btnHome, -21, SpringLayout.SOUTH, panel);
 		layout.putConstraint(SpringLayout.EAST, btnHome, -61, SpringLayout.EAST, panel);
+		btnHome.setForeground(new Color(255, 80, 80));
+		btnHome.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Advance to the next question
@@ -231,7 +233,7 @@ public class QuestionView extends JFrame {
 				newQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				JLabel newAnswer = new JLabel("<html> >>> " + listQA.get(question) + "<html>");
 				newAnswer.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-				JLabel br = new JLabel(" -----");
+				JLabel br = new JLabel(" ");
 				br.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				previousQuestionsPanel.add(newQuestion);
 				previousQuestionsPanel.add(newAnswer);
